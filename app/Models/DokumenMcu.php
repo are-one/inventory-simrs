@@ -25,4 +25,13 @@ class DokumenMcu extends Model
     {
         return $this->hasOne(HasilBacaEkg::class);
     }
+
+    public function hasilBacaSpirometri()
+    {
+        return $this->hasOne(HasilBacaSpirometri::class);
+    }
+    public function hasilBacaAudiometri()
+    {
+        return $this->hasOne(HasilBacaAudiometri::class);
+    }
 }

@@ -3501,7 +3501,7 @@
             const hasilKesimpulanContainer = document.getElementById('hasilKesimpulanContainer');
 
             // Tampilkan hanya untuk Radiologi dan EKG
-            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG') {
+            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG' || jenisDokumen === 'Spirometri' || jenisDokumen === 'Audiometri') {
                 hasilKesimpulanContainer.style.display = 'block';
 
                 // Tambahkan required untuk textarea jika diperlukan

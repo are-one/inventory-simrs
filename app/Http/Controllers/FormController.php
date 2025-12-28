@@ -6,8 +6,10 @@ use App\Models\DokumenMcu;
 use App\Models\Employee;
 use App\Models\MedicalCheckUp;
 use App\Models\Dataawal;
+use App\Models\HasilBacaAudiometri;
 use App\Models\HasilBacaEkg;
 use App\Models\HasilBacaRadiologi;
+use App\Models\HasilBacaSpirometri;
 use App\Models\HasilPemeriksaan;
 use App\Models\KategoriMcu;
 use App\Models\Kebiasaan;
@@ -720,6 +722,22 @@ class FormController extends Controller
                 ]);
             }
 
+            if ($request->jenis_dokumen === 'Spirometri') {
+                $request->validate([
+                    'hasil' => 'nullable|string',
+                    'kesimpulan' => 'nullable|string',
+                ]);
+            }
+
+            if ($request->jenis_dokumen === 'Audiometri') {
+                $request->validate([
+                    'hasil' => 'nullable|string',
+                    'kesimpulan' => 'nullable|string',
+                ]);
+            }
+
+
+
             $mcu = $this->getOrCreateMCU($request->employee_id);
 
             $file = $request->file('file');
@@ -742,6 +760,22 @@ class FormController extends Controller
 
             if ($request->jenis_dokumen === 'EKG') {
                 HasilBacaEkg::create([
+                    'dokumen_mcu_id' => $dokumen->id,
+                    'hasil' => $request->hasil,
+                    'kesimpulan' => $request->kesimpulan,
+                ]);
+            }
+
+            if ($request->jenis_dokumen === 'Spirometri') {
+                HasilBacaSpirometri::create([
+                    'dokumen_mcu_id' => $dokumen->id,
+                    'hasil' => $request->hasil,
+                    'kesimpulan' => $request->kesimpulan,
+                ]);
+            }
+
+            if ($request->jenis_dokumen === 'Audiometri') {
+                HasilBacaAudiometri::create([
                     'dokumen_mcu_id' => $dokumen->id,
                     'hasil' => $request->hasil,
                     'kesimpulan' => $request->kesimpulan,
@@ -964,6 +998,12 @@ class FormController extends Controller
             },
             'dokumenEkg' => function ($query) {
                 $query->with('hasilBacaEkg');
+            },
+            'dokumenSpirometri' => function ($query) {
+                $query->with('hasilBacaSpirometri');
+            },
+            'dokumenAudiometri' => function ($query) {
+                $query->with('hasilBacaAudiometri');
             }
         ])->findOrFail($mcuId);
 
@@ -987,9 +1027,11 @@ class FormController extends Controller
             'pemeriksaan_neurologis_khusus' => $mcu->pemeriksaanNeurologisKhusus,
             'pemeriksaan_muskuloskeletal' => $mcu->pemeriksaanMuskuloskeletal,
             'pemeriksaan_gigi_mulut' => $mcu->pemeriksaanGigiMulut,
-            'laboratorium_files' => $mcu->dokumenLaboratorium, // file-file lab (upload)
-            'radiologi_files' => $mcu->dokumenRadiologi, // file-file radiologi dengan hasil baca
-            'ekg_files' => $mcu->dokumenEkg, // file-file EKG dengan hasil baca
+            'laboratorium_files' => $mcu->dokumenLaboratorium,
+            'radiologi_files' => $mcu->dokumenRadiologi,
+            'ekg_files' => $mcu->dokumenEkg,
+            'spirometri_files' => $mcu->dokumenSpirometri,
+            'audiometri_files' => $mcu->dokumenAudiometri,
             'hasil_pemeriksaan' => $mcu->hasilPemeriksaan,
         ];
     }
@@ -1092,7 +1134,7 @@ class FormController extends Controller
 
 
             // Output PDF
-            $filename = 'Medical_Checkup_Report_' . $mcu->employee->nrp . '_' . date('Ymd_His') . '.pdf';
+            $filename = $mcu->employee->nama . '_' . $mcu->employee->nrp . '.pdf';
 
             // REVISI BAGIAN INI:
             if (ob_get_length()) {

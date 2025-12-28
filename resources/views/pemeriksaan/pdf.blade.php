@@ -26,6 +26,15 @@
             background: white;
         }
 
+        .page-last {
+            width: 100%;
+            max-width: 210mm;
+            min-height: auto;
+            padding: 16px;
+            margin: 0 auto 20px auto;
+            background: white;
+        }
+
         .header {
             border-bottom: 3px solid #1e5a9e;
             padding-bottom: 10px;
@@ -318,9 +327,21 @@
             .page {
                 width: 210mm;
                 min-height: 297mm;
-                padding: 12mm; /* Kurangi padding untuk lebih banyak ruang */
+                padding: 12mm;
                 margin: 0;
-                page-break-after: always;
+                /* HAPUS page-break-after: always; */
+                page-break-after: always; /* Ganti dengan auto */
+                page-break-inside: avoid;
+            }
+
+            .page-last {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 12mm;
+                margin: 0;
+                /* HAPUS page-break-after: always; */
+                page-break-after: auto; /* Ganti dengan auto */
+                page-break-inside: avoid;
             }
 
             .patient-info {
@@ -329,15 +350,20 @@
             }
 
             .ekg-container {
-                max-height: 500px; /* Tinggi maksimal saat cetak */
+                max-height: 500px;
                 page-break-inside: avoid;
             }
 
             .ekg-container img {
-                max-height: 500px; /* Sesuaikan dengan tinggi halaman */
+                max-height: 500px;
             }
 
             .medical-team-grid {
+                page-break-inside: avoid;
+            }
+
+            /* Tambahkan untuk menghindari page break di tempat yang tidak perlu */
+            table, tr, td, th {
                 page-break-inside: avoid;
             }
         }
@@ -400,11 +426,19 @@
                         <div class="col-8">
                             <div class="patient-data">
                                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                                    <tr>
-                                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                                        <td style="width:10px; vertical-align:top;">:</td>
-                                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                                    </tr>
+                                    @if ($employee->nik)
+                                        <tr>
+                                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                                            <td style="width:10px; vertical-align:top;">:</td>
+                                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                                            <td style="width:10px; vertical-align:top;">:</td>
+                                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td style="font-weight:bold;">Nama Lengkap</td>
                                         <td>:</td>
@@ -452,7 +486,7 @@
                                                 $data = file_get_contents($path);
                                                 $base64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode($data);
                                             @endphp
-                                            <img src="{{ $base64 }}" alt="Foto" style="width: 100px">
+                                            <img src="{{ $base64 }}" alt="Foto" style="width: 100px;">
                                         @else
                                             <p style="color:red;">File tidak ditemukan di: {{ $path }}</p>
                                         @endif
@@ -529,26 +563,18 @@
                 <tr>
                     <td style="width: 70%; vertical-align: top; padding-right: 20px;">
                         <div class="medical-team">
-                            <h4 style="margin-bottom: 10px; color: #1e5a9e;">TIM MEDIS:</h4>
+                            <h4 style="margin-bottom: 10px; color: #1e5a9e;">TIM MEDIS:</h4><br>
 
-                            <div style="margin-bottom: 15px; font-size: 10px;">
-                                <strong>KOORDINATOR</strong>: dr. Joddy Satrio Ariezal
-                            </div>
-
-                            <div style="margin-bottom: 5px;">
-                                <strong>ANGGOTA</strong>:
-                            </div>
                             <div style="font-size: 10px; line-height: 1.4;">
-                                1. dr. Budi Arisandi<br>
-                                2. dr. Muh. Yusni Chandratirta A<br>
-                                3. dr. Aspita Riskiana<br>
-                                4. dr. Sovia Pratwi Lahida<br>
-                                5. dr. Ade Chandra Multazazam<br>
-                                6. dr. Nur Sahfahria<br>
+                                1. dr. Hj. Ucy Nadjmiyah, Sp. PK.<br>
+                                2. dr. Joddy Satrio Ariezal<br>
+                                3. dr. Budi Arisandi<br>
+                                4. dr. Muh. Yusni Chandratirta A<br>
+                                5. dr. Aspita Riskiana<br>
+                                6. dr. Sovia Pratwi Lahida<br>
                                 7. dr. Abdianto Ilman<br>
-                                8. dr. Dyah Nilasari, Sp.Rad.<br>
-                                9. dr. Sumiaty, Sp. Rad.<br>
-                                10. dr. Arfandy, Sp. PK.
+                                8. dr. Ade Chandra Multazazam<br>
+                                9. dr. Nur Sahfahria<br>
                             </div>
                         </div>
                     </td>
@@ -623,11 +649,19 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                    <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                    </tr>
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -889,11 +923,19 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                    <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                    </tr>
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -1226,11 +1268,19 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                    <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                    </tr>
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -1462,11 +1512,19 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                    <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                    </tr>
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -1557,11 +1615,19 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                    <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
-                    </tr>
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -1594,11 +1660,11 @@
             @endforeach
 
             @php $firstEkg = $all_pemeriksaan['ekg_files']->first(); @endphp
-            <div style="width: 100%; height: 670px; margin: 0px 0; background: #000; overflow: hidden;">
+            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
                 @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file)))
                     <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file) }}"
                             alt="EKG"
-                            style="width: 100%; height: 98%; object-fit: contain;">
+                            style="width: 100%; height: 60%; object-fit: contain;">
                 @endif
             </div>
 
@@ -1610,7 +1676,8 @@
 
     </div>
 
-    <!-- Page 7: Laboratorium -->
+    <!-- Page 8: Spirometri -->
+    @if(isset($all_pemeriksaan['spirometri_files']) && $all_pemeriksaan['spirometri_files']->count() > 0)
     <div class="page">
         <div class="header">
             <div class="header-content">
@@ -1643,11 +1710,210 @@
         <div class="patient-info">
             <div class="patient-data">
                 <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
-                        <td style="width:130px; font-weight:bold; vertical-align:top;">No. Registrasi</td>
-                        <td style="width:10px; vertical-align:top;">:</td>
-                        <td style="font-weight:bold; color:#e63946;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</td>
+                        <td style="font-weight:bold;">Nama Lengkap</td>
+                        <td>:</td>
+                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
                     </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-title">PEMERIKSAAN SPIROMETER</div>
+
+        @if(isset($all_pemeriksaan['spirometri_files']) && $all_pemeriksaan['spirometri_files']->count() > 0)
+            @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
+                @if($spiro->hasilBacaSpirometri)
+                    <table style="margin-top: 15px;">
+                        <tr>
+                            <th style="width: 20%;">Hasil</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 20%;">Kesimpulan</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>
+                        </tr>
+                    </table>
+                @endif
+            @endforeach
+
+            @php $firstSpiro = $all_pemeriksaan['spirometri_files']->first(); @endphp
+            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
+                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
+                            alt="SPIROMETRI"
+                            style="width: 100%; height: 60%; object-fit: contain;">
+                @endif
+            </div>
+
+        @else
+            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                Tidak ada hasil pemeriksaan Spirometer
+            </p>
+        @endif
+
+    </div>
+    @endif
+
+    <!-- Page 9: Audiometri -->
+    @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
+    <div class="page">
+        <div class="header">
+            <div class="header-content">
+                <div class="hospital-logo-container">
+                    <div class="row align-items-center">
+                        <table border="0">
+                            <tr>
+                                <td>
+                                    <div class="col-2">
+                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            class="logo">
+                                    </div>
+                                </td>
+
+                                 <td class="text-center">
+                                    <div class="col-10">
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-info">
+            <div class="patient-data">
+                <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td style="font-weight:bold;">Nama Lengkap</td>
+                        <td>:</td>
+                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-title">PEMERIKSAAN AUDIOMETER</div>
+
+        @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
+            @foreach($all_pemeriksaan['audiometri_files'] as $audio)
+                @if($audio->hasilBacaAudiometri)
+                    <table style="margin-top: 15px;">
+                        <tr>
+                            <th style="width: 20%;">Hasil</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->hasil }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 20%;">Kesimpulan</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->kesimpulan }}</td>
+                        </tr>
+                    </table>
+                @endif
+            @endforeach
+
+            @php $firstAudio = $all_pemeriksaan['audiometri_files']->first(); @endphp
+            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file)))
+                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file) }}"
+                            alt="Audiometer"
+                            style="width: 100%; height: 60%; object-fit: contain;">
+                @endif
+            </div>
+
+        @else
+            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                Tidak ada hasil pemeriksaan Audiometer
+            </p>
+        @endif
+
+    </div>
+    @endif
+
+     <!-- Page 7: Laboratorium -->
+    <div class="page-last">
+        <div class="header">
+            <div class="header-content">
+                <div class="hospital-logo-container">
+                    <div class="row align-items-center">
+                        <table border="0">
+                            <tr>
+                                <td>
+                                    <div class="col-2">
+                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            class="logo">
+                                    </div>
+                                </td>
+
+                                 <td class="text-center">
+                                    <div class="col-10">
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-info">
+            <div class="patient-data">
+                <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-weight:bold;">Nama Lengkap</td>
                         <td>:</td>
@@ -1673,6 +1939,5 @@
             * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
         </div>
     </div>
-
 </body>
 </html>
