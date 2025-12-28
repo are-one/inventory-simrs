@@ -25,7 +25,7 @@
                                                     <option value="">Pilih Karyawan</option>
                                                     @foreach ($employees as $employee)
                                                         <option value="{{ $employee->id }}">{{ $employee->nama }} -
-                                                            {{ $employee->nrp }}</option>
+                                                            {{ $employee->no_rm }} ({{ $employee->nama_perusahaan }})</option>
                                                     @endforeach
                                                 </select>
                                                 @error('employee_id')
