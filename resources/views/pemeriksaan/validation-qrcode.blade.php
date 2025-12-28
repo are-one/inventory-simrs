@@ -152,8 +152,8 @@
                 <strong>Nama:</strong>
                 <span>{{ strtoupper($employee->nama) }}</span>
 
-                <strong>No. Registrasi:</strong>
-                <span>MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</span>
+                <strong>NIK / NRP:</strong>
+                <span>{{ $employee->nik }} / {{ $employee->nrp}}</span>
 
                 <strong>Jenis Kelamin:</strong>
                 <span>{{ $employee->jenis_kelamin == 'L' ? 'Pria' : 'Wanita' }}</span>
@@ -165,7 +165,7 @@
                 <span>{{ $employee->nama_perusahaan ?? '-' }}</span>
 
                 <strong>Tanggal MCU:</strong>
-                <span>{{ $mcu->tanggal_mcu }}</span>
+                <span>{{ \Carbon\Carbon::parse($mcu->tanggal_mcu)->format('d F Y') }}</span>
             </div>
         </div>
 
