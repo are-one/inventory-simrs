@@ -3019,8 +3019,7 @@
                                                                             <label class="form-label">File Dokumen</label>
                                                                             <input type="file"
                                                                                 name="file"
-                                                                                class="form-control"
-                                                                                required>
+                                                                                class="form-control">
                                                                             <small class="text-muted">
                                                                                 PDF / JPG / PNG (Maks 5MB)
                                                                             </small>

@@ -705,7 +705,7 @@ class FormController extends Controller
             $request->validate([
                 'employee_id' => 'required|exists:employees,id',
                 'jenis_dokumen' => 'required|string|max:100|in:Laboratorium,EKG,Radiologi,Audiometri,Spirometri,Lainnya',
-                'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ]);
 
             if ($request->jenis_dokumen === 'Radiologi') {
@@ -740,14 +740,21 @@ class FormController extends Controller
 
             $mcu = $this->getOrCreateMCU($request->employee_id);
 
-            $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('dokumen-mcu', $fileName, 'public');
+            // DEFAULT FILE NULL
+            $fileName = null;
 
+            // UPLOAD FILE JIKA ADA
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('dokumen-mcu', $fileName, 'public');
+            }
+
+            // SIMPAN DOKUMEN MCU
             $dokumen = DokumenMcu::create([
                 'mcu_id' => $mcu->id,
                 'jenis_dokumen' => $request->jenis_dokumen,
-                'nama_file' => $fileName,
+                'nama_file' => $fileName, // bisa NULL
             ]);
 
             if ($request->jenis_dokumen === 'Radiologi') {
