@@ -1561,18 +1561,23 @@
                 @foreach($all_pemeriksaan['radiologi_files'] as $radiologi)
                     @if($radiologi->hasilBacaRadiologi)
                         <table style="margin-top: 15px;">
-                            <tr>
-                                <th style="width: 20%;">Hasil</th>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->hasil }}</td>
-                            </tr>
-                            <tr>
-                                <th style="width: 20%;">Kesimpulan</th>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->kesimpulan }}</td>
-                            </tr>
+                            @if ($radiologi->hasilBacaRadiologi->hasil)
+                                <tr>
+                                    <th style="width: 20%;">Hasil</th>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->hasil }}</td>
+                                </tr>
+                            @endif
+                            @if ($radiologi->hasilBacaRadiologi->kesimpulan)
+                                <tr>
+                                    <th style="width: 20%;">Kesimpulan</th>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->kesimpulan }}</td>
+                                </tr>
+                            @endif
+
                         </table>
                     @endif
                 @endforeach
