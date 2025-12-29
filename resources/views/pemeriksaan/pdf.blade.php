@@ -1870,7 +1870,20 @@
                                 <th style="width: 20%;">Hasil</th>
                             </tr>
                             <tr>
-                                <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->hasil }}</td>
+                                <td style="padding: 10px;">
+                                    <table style="border-collapse: collapse;">
+                                        <tr>
+                                            <td width="15%"><strong>Telinga Kanan</strong></td>
+                                            <td width="3%">:</td>
+                                            <td width="82%">{{ $audio->hasilBacaAudiometri->telinga_kanan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Telinga Kiri</strong></td>
+                                            <td>:</td>
+                                            <td>{{ $audio->hasilBacaAudiometri->telinga_kiri }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                             <tr>
                                 <th style="width: 20%;">Kesimpulan</th>
