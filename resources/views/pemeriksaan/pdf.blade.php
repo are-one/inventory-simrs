@@ -1784,7 +1784,7 @@
                 @endforeach
 
                 @php $firstSpiro = $all_pemeriksaan['spirometri_files']->first(); @endphp
-                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px; text-align: center">
                     @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
                         <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
                                 alt="SPIROMETRI"
