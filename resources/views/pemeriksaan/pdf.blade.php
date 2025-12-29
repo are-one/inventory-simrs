@@ -904,7 +904,6 @@
                                             class="logo">
                                     </div>
                                 </td>
-
                                  <td class="text-center">
                                     <div class="col-10">
                                         <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
@@ -1789,7 +1788,7 @@
                     @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
                         <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
                                 alt="SPIROMETRI"
-                                style="width: 100%; height: 60%; object-fit: contain;">
+                                style="width: 100%; height: 100%; object-fit: contain;">
                     @endif
                 </div>
 
