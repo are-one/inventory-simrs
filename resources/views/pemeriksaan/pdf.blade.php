@@ -1569,23 +1569,23 @@
                                     <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->hasil }}</td>
                                 </tr>
                             @endif
-                            @if ($radiologi->hasilBacaRadiologi->kesimpulan)
+                            {{-- @if ($radiologi->hasilBacaRadiologi->kesimpulan)
                                 <tr>
                                     <th style="width: 20%;">Kesimpulan</th>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->kesimpulan }}</td>
                                 </tr>
-                            @endif
+                            @endif --}}
 
                         </table>
                     @endif
                 @endforeach
 
                 @php $firstRadiologi = $all_pemeriksaan['radiologi_files']->first(); @endphp
-                <div class="image-container">
+                <div style="width: 100%; height: 650px; margin: 0px 0; background: #000; overflow: hidden; margin-top:5px">
                     @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file)))
-                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file) }}" alt="X-Ray Thorax">
+                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file) }}" alt="X-Ray Thorax"  style="width: 100%; height: 100%; object-fit: contain;">
                     @else
                         <div class="image-placeholder">
                             <p style="font-size: 14px; margin-bottom: 10px;">{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</p>
