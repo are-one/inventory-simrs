@@ -3059,6 +3059,51 @@
                                                                             </div>
                                                                         </div>
 
+                                                                          {{-- Form Khusus Audiometri --}}
+                                                                        <div class="col-12" id="audiometriContainer" style="display: none;">
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-12">
+                                                                                    <div class="card border-info">
+
+                                                                                        <div class="card-body mt-3">
+                                                                                            <div class="row g-3">
+                                                                                                {{-- Telinga Kanan --}}
+                                                                                                <div class="col-md-6">
+                                                                                                    <label class="form-label">Telinga Kanan</label>
+                                                                                                    <input type="text"
+                                                                                                        name="telinga_kanan"
+                                                                                                        id="telingaKananInput"
+                                                                                                        class="form-control"
+                                                                                                        >
+                                                                                                </div>
+
+                                                                                                {{-- Telinga Kiri --}}
+                                                                                                <div class="col-md-6">
+                                                                                                    <label class="form-label">Telinga Kiri</label>
+                                                                                                    <input type="text"
+                                                                                                        name="telinga_kiri"
+                                                                                                        id="telingaKiriInput"
+                                                                                                        class="form-control"
+                                                                                                        >
+                                                                                                </div>
+
+                                                                                                {{-- Kesimpulan Audiometri --}}
+                                                                                                <div class="col-12">
+                                                                                                    <label class="form-label">Kesimpulan Audiometri</label>
+                                                                                                    <textarea name="kesimpulan"
+                                                                                                            id="kesimpulanAudiometriInput"
+                                                                                                            class="form-control"
+                                                                                                            rows="3"
+                                                                                                            placeholder="Masukkan kesimpulan hasil audiometri..."></textarea>
+                                                                                                    <small class="text-muted">Kesimpulan hasil pemeriksaan audiometri</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -3498,22 +3543,33 @@
         document.getElementById('jenisDokumenSelect').addEventListener('change', function() {
             const jenisDokumen = this.value;
             const hasilKesimpulanContainer = document.getElementById('hasilKesimpulanContainer');
+            const audiometriContainer = document.getElementById('audiometriContainer');
 
-            // Tampilkan hanya untuk Radiologi dan EKG
-            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG' || jenisDokumen === 'Spirometri' || jenisDokumen === 'Audiometri') {
+            // Reset semua container ke hidden
+            hasilKesimpulanContainer.style.display = 'none';
+            audiometriContainer.style.display = 'none';
+
+            // Reset required attributes
+            document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
+                textarea.required = false;
+                textarea.value = '';
+            });
+
+            document.querySelectorAll('#audiometriContainer input, #audiometriContainer textarea').forEach(input => {
+                input.required = false;
+                input.value = '';
+            });
+
+            // Tampilkan container sesuai jenis dokumen
+            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG') {
                 hasilKesimpulanContainer.style.display = 'block';
-
-                // Tambahkan required untuk textarea jika diperlukan
                 document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
                     textarea.required = true;
                 });
-            } else {
-                hasilKesimpulanContainer.style.display = 'none';
-
-                // Hapus required dan kosongkan value
-                document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
-                    textarea.required = false;
-                    textarea.value = '';
+            } else if (jenisDokumen === 'Audiometri') {
+                audiometriContainer.style.display = 'block';
+                document.querySelectorAll('#audiometriContainer input, #audiometriContainer textarea').forEach(input => {
+                    input.required = true;
                 });
             }
         });

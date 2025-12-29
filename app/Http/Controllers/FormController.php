@@ -731,7 +731,8 @@ class FormController extends Controller
 
             if ($request->jenis_dokumen === 'Audiometri') {
                 $request->validate([
-                    'hasil' => 'nullable|string',
+                    'telinga_kanan' => 'nullable|string',
+                    'telinga_kiri' => 'nullable|string',
                     'kesimpulan' => 'nullable|string',
                 ]);
             }
@@ -784,7 +785,8 @@ class FormController extends Controller
             if ($request->jenis_dokumen === 'Audiometri') {
                 HasilBacaAudiometri::create([
                     'dokumen_mcu_id' => $dokumen->id,
-                    'hasil' => $request->hasil,
+                    'telinga_kanan' => $request->telinga_kanan,
+                    'telinga_kiri' => $request->telinga_kiri,
                     'kesimpulan' => $request->kesimpulan,
                 ]);
             }

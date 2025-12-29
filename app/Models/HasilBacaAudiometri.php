@@ -12,7 +12,10 @@ class HasilBacaAudiometri extends Model
     protected $fillable = [
         'dokumen_mcu_id',
         'hasil',
-        'kesimpulan'
+        'kesimpulan',
+        'telinga_kanan',
+        'telinga_kiri'
+
     ];
 
     public function dokumenMcu()
