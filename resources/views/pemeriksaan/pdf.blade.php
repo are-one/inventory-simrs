@@ -1883,20 +1883,22 @@
                 @endforeach
 
                 @php $firstAudio = $all_pemeriksaan['audiometri_files']->first(); @endphp
-                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
-                    @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file)))
-                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file) }}"
-                                alt="Audiometer"
-                                style="width: 100%; height: 60%; object-fit: contain;">
-                    @endif
-                </div>
+                @if ($firstAudio->nama_file != null)
+                    <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
 
-            @else
-                <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
-                    Tidak ada hasil pemeriksaan Audiometer
-                </p>
+                        @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file)))
+                            <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file) }}"
+                                    alt="Audiometer"
+                                    style="width: 100%; height: 60%; object-fit: contain;">
+                        @else
+                            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                                Tidak ada hasil pemeriksaan Audiometer
+                            </p>
+                        @endif
+
+                    </div>
+                @endif
             @endif
-
         </div>
         @endif
     @endif
