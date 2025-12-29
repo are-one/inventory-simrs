@@ -1031,20 +1031,37 @@
                 <tr>
                     <td class="indent">Status Gizi (IMT)</td>
                     <td>
-                        @if($all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->tinggi_badan && $all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->berat_badan)
+                        @if(
+                            !empty($all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->tinggi_badan) &&
+                            !empty($all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->berat_badan)
+                        )
                             @php
                                 $tinggi = $all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->tinggi_badan / 100;
-                                $berat = $all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->berat_badan;
-                                $imt = $berat / ($tinggi * $tinggi);
+                                $berat  = $all_pemeriksaan['pemeriksaan_tanda_vital_gizi']->berat_badan;
+                                $imt    = $berat / ($tinggi * $tinggi);
                             @endphp
-                            @if($imt < 18.5) Underweight (IMT: {{ number_format($imt, 1) }})
-                            @elseif($imt >= 18.5 && $imt < 25) Normal (IMT: {{ number_format($imt, 1) }})
-                            @elseif($imt >= 25 && $imt < 30) Overweight (IMT: {{ number_format($imt, 1) }})
-                            @else Obesitas (IMT: {{ number_format($imt, 1) }})
+
+                            @if($imt < 18.5)
+                                <span class="text-blue-600 font-semibold">
+                                    Underweight (IMT: {{ number_format($imt, 1) }})
+                                </span>
+                            @elseif($imt >= 18.5 && $imt < 25)
+                                <span class="text-green-600 font-semibold">
+                                    Normal (IMT: {{ number_format($imt, 1) }})
+                                </span>
+                            @elseif($imt >= 25 && $imt < 30)
+                                <span class="text-yellow-600 font-semibold">
+                                    Overweight (IMT: {{ number_format($imt, 1) }})
+                                </span>
+                            @else
+                                <span class="text-red-600 font-semibold">
+                                    Obesitas (IMT: {{ number_format($imt, 1) }})
+                                </span>
                             @endif
                         @else
-                            -
+                            <span class="text-gray-500 italic">Data tinggi / berat badan belum tersedia</span>
                         @endif
+
                     </td>
                 </tr>
                 <tr>
