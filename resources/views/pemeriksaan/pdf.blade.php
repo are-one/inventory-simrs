@@ -1480,395 +1480,403 @@
     </div>
 
     <!-- Page 5: Radiologi -->
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="hospital-logo-container">
-                    <div class="row align-items-center">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                            class="logo">
-                                    </div>
-                                </td>
+    @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'Rontgen Thorax'))
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="hospital-logo-container">
+                        <div class="row align-items-center">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <div class="col-2">
+                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                                class="logo">
+                                        </div>
+                                    </td>
 
-                                 <td class="text-center">
-                                    <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
-                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                                    <td class="text-center">
+                                        <div class="col-10">
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="patient-info">
-            <div class="patient-data">
-                <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                     @if ($employee->nik)
+            <div class="patient-info">
+                <div class="patient-data">
+                    <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                        @if ($employee->nik)
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                            </tr>
+                        @endif
                         <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
-                        </tr>
-                    @endif
-                    <tr>
-                        <td style="font-weight:bold;">Nama Lengkap</td>
-                        <td>:</td>
-                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section-title">PEMERIKSAAN RADIOLOGI - THORAX</div>
-
-        @if(isset($all_pemeriksaan['radiologi_files']) && $all_pemeriksaan['radiologi_files']->count() > 0)
-            @foreach($all_pemeriksaan['radiologi_files'] as $radiologi)
-                @if($radiologi->hasilBacaRadiologi)
-                    <table style="margin-top: 15px;">
-                        <tr>
-                            <th style="width: 20%;">Hasil</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->hasil }}</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 20%;">Kesimpulan</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->kesimpulan }}</td>
+                            <td style="font-weight:bold;">Nama Lengkap</td>
+                            <td>:</td>
+                            <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
                         </tr>
                     </table>
-                @endif
-            @endforeach
-
-            @php $firstRadiologi = $all_pemeriksaan['radiologi_files']->first(); @endphp
-            <div class="image-container">
-                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file)))
-                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file) }}" alt="X-Ray Thorax">
-                @else
-                    <div class="image-placeholder">
-                        <p style="font-size: 14px; margin-bottom: 10px;">{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</p>
-                        <p style="font-size: 11px; margin-bottom: 5px;">{{ $employee->tanggal_lahir }}Y</p>
-                        <p style="font-size: 11px; margin-bottom: 5px;">{{ $mcu->tanggal_mcu->format('d.m.Y') }}</p>
-                        <p style="font-size: 11px;">{{ $employee->jenis_kelamin == 'L' ? 'M' : 'F' }}</p>
-                        <br><br>
-                        <p style="font-size: 24px; font-weight: bold; letter-spacing: 3px;">L</p>
-                        <br><br>
-                        <p style="font-size: 10px;">[X-Ray Thorax Image]</p>
-                        <p style="font-size: 9px; margin-top: 5px;">Gambar Rontgen Thorax PA</p>
-                    </div>
-                @endif
+                </div>
             </div>
-        @else
-            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
-                Tidak ada hasil pemeriksaan radiologi
-            </p>
-        @endif
 
-    </div>
+            <div class="section-title">PEMERIKSAAN RADIOLOGI - THORAX</div>
+
+            @if(isset($all_pemeriksaan['radiologi_files']) && $all_pemeriksaan['radiologi_files']->count() > 0)
+                @foreach($all_pemeriksaan['radiologi_files'] as $radiologi)
+                    @if($radiologi->hasilBacaRadiologi)
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th style="width: 20%;">Hasil</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->hasil }}</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 20%;">Kesimpulan</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $radiologi->hasilBacaRadiologi->kesimpulan }}</td>
+                            </tr>
+                        </table>
+                    @endif
+                @endforeach
+
+                @php $firstRadiologi = $all_pemeriksaan['radiologi_files']->first(); @endphp
+                <div class="image-container">
+                    @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file)))
+                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstRadiologi->nama_file) }}" alt="X-Ray Thorax">
+                    @else
+                        <div class="image-placeholder">
+                            <p style="font-size: 14px; margin-bottom: 10px;">{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }}</p>
+                            <p style="font-size: 11px; margin-bottom: 5px;">{{ $employee->tanggal_lahir }}Y</p>
+                            <p style="font-size: 11px; margin-bottom: 5px;">{{ $mcu->tanggal_mcu->format('d.m.Y') }}</p>
+                            <p style="font-size: 11px;">{{ $employee->jenis_kelamin == 'L' ? 'M' : 'F' }}</p>
+                            <br><br>
+                            <p style="font-size: 24px; font-weight: bold; letter-spacing: 3px;">L</p>
+                            <br><br>
+                            <p style="font-size: 10px;">[X-Ray Thorax Image]</p>
+                            <p style="font-size: 9px; margin-top: 5px;">Gambar Rontgen Thorax PA</p>
+                        </div>
+                    @endif
+                </div>
+            @else
+                <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                    Tidak ada hasil pemeriksaan radiologi
+                </p>
+            @endif
+
+        </div>
+    @endif
 
     <!-- Page 6: EKG -->
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="hospital-logo-container">
-                    <div class="row align-items-center">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                            class="logo">
-                                    </div>
-                                </td>
+    @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'EKG'))
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="hospital-logo-container">
+                        <div class="row align-items-center">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <div class="col-2">
+                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                                class="logo">
+                                        </div>
+                                    </td>
 
-                                 <td class="text-center">
-                                    <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
-                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                                    <td class="text-center">
+                                        <div class="col-10">
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="patient-info">
-            <div class="patient-data">
-                <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                     @if ($employee->nik)
+            <div class="patient-info">
+                <div class="patient-data">
+                    <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                        @if ($employee->nik)
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                            </tr>
+                        @endif
                         <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
-                        </tr>
-                    @endif
-                    <tr>
-                        <td style="font-weight:bold;">Nama Lengkap</td>
-                        <td>:</td>
-                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section-title">PEMERIKSAAN JANTUNG - ELEKTROKARDIOGRAFI (EKG)</div>
-
-        @if(isset($all_pemeriksaan['ekg_files']) && $all_pemeriksaan['ekg_files']->count() > 0)
-            @foreach($all_pemeriksaan['ekg_files'] as $ekg)
-                @if($ekg->hasilBacaEkg)
-                    <table style="margin-top: 15px;">
-                        <tr>
-                            <th style="width: 20%;">Hasil</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $ekg->hasilBacaEkg->hasil }}</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 20%;">Kesimpulan</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $ekg->hasilBacaEkg->kesimpulan }}</td>
+                            <td style="font-weight:bold;">Nama Lengkap</td>
+                            <td>:</td>
+                            <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
                         </tr>
                     </table>
-                @endif
-            @endforeach
-
-            @php $firstEkg = $all_pemeriksaan['ekg_files']->first(); @endphp
-            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
-                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file)))
-                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file) }}"
-                            alt="EKG"
-                            style="width: 100%; height: 60%; object-fit: contain;">
-                @endif
-            </div>
-
-        @else
-            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
-                Tidak ada hasil pemeriksaan EKG
-            </p>
-        @endif
-
-    </div>
-
-    <!-- Page 8: Spirometri -->
-    @if(isset($all_pemeriksaan['spirometri_files']) && $all_pemeriksaan['spirometri_files']->count() > 0)
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="hospital-logo-container">
-                    <div class="row align-items-center">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                            class="logo">
-                                    </div>
-                                </td>
-
-                                 <td class="text-center">
-                                    <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
-                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="patient-info">
-            <div class="patient-data">
-                <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                     @if ($employee->nik)
-                        <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
-                        </tr>
+            <div class="section-title">PEMERIKSAAN JANTUNG - ELEKTROKARDIOGRAFI (EKG)</div>
+
+            @if(isset($all_pemeriksaan['ekg_files']) && $all_pemeriksaan['ekg_files']->count() > 0)
+                @foreach($all_pemeriksaan['ekg_files'] as $ekg)
+                    @if($ekg->hasilBacaEkg)
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th style="width: 20%;">Hasil</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $ekg->hasilBacaEkg->hasil }}</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 20%;">Kesimpulan</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $ekg->hasilBacaEkg->kesimpulan }}</td>
+                            </tr>
+                        </table>
                     @endif
-                    <tr>
-                        <td style="font-weight:bold;">Nama Lengkap</td>
-                        <td>:</td>
-                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
-                    </tr>
-                </table>
-            </div>
+                @endforeach
+
+                @php $firstEkg = $all_pemeriksaan['ekg_files']->first(); @endphp
+                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                    @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file)))
+                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstEkg->nama_file) }}"
+                                alt="EKG"
+                                style="width: 100%; height: 60%; object-fit: contain;">
+                    @endif
+                </div>
+
+            @else
+                <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                    Tidak ada hasil pemeriksaan EKG
+                </p>
+            @endif
+
         </div>
+    @endif
 
-        <div class="section-title">PEMERIKSAAN SPIROMETER</div>
-
+    <!-- Page 7: Spirometri -->
+    @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'Spirometer'))
         @if(isset($all_pemeriksaan['spirometri_files']) && $all_pemeriksaan['spirometri_files']->count() > 0)
-            @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
-                @if($spiro->hasilBacaSpirometri)
-                    <table style="margin-top: 15px;">
-                        <tr>
-                            <th style="width: 20%;">Hasil</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 20%;">Kesimpulan</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>
-                        </tr>
-                    </table>
-                @endif
-            @endforeach
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="hospital-logo-container">
+                        <div class="row align-items-center">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <div class="col-2">
+                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                                class="logo">
+                                        </div>
+                                    </td>
 
-            @php $firstSpiro = $all_pemeriksaan['spirometri_files']->first(); @endphp
-            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
-                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
-                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
-                            alt="SPIROMETRI"
-                            style="width: 100%; height: 60%; object-fit: contain;">
-                @endif
-            </div>
-
-        @else
-            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
-                Tidak ada hasil pemeriksaan Spirometer
-            </p>
-        @endif
-
-    </div>
-    @endif
-
-    <!-- Page 9: Audiometri -->
-    @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
-    <div class="page">
-        <div class="header">
-            <div class="header-content">
-                <div class="hospital-logo-container">
-                    <div class="row align-items-center">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                            class="logo">
-                                    </div>
-                                </td>
-
-                                 <td class="text-center">
-                                    <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
-                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                                    <td class="text-center">
+                                        <div class="col-10">
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="patient-info">
-            <div class="patient-data">
-                <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                     @if ($employee->nik)
+            <div class="patient-info">
+                <div class="patient-data">
+                    <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                        @if ($employee->nik)
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                            </tr>
+                        @endif
                         <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
-                            <td style="width:10px; vertical-align:top;">:</td>
-                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
-                        </tr>
-                    @endif
-                    <tr>
-                        <td style="font-weight:bold;">Nama Lengkap</td>
-                        <td>:</td>
-                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section-title">PEMERIKSAAN AUDIOMETER</div>
-
-        @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
-            @foreach($all_pemeriksaan['audiometri_files'] as $audio)
-                @if($audio->hasilBacaAudiometri)
-                    <table style="margin-top: 15px;">
-                        <tr>
-                            <th style="width: 20%;">Hasil</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->hasil }}</td>
-                        </tr>
-                        <tr>
-                            <th style="width: 20%;">Kesimpulan</th>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->kesimpulan }}</td>
+                            <td style="font-weight:bold;">Nama Lengkap</td>
+                            <td>:</td>
+                            <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
                         </tr>
                     </table>
-                @endif
-            @endforeach
-
-            @php $firstAudio = $all_pemeriksaan['audiometri_files']->first(); @endphp
-            <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
-                @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file)))
-                    <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file) }}"
-                            alt="Audiometer"
-                            style="width: 100%; height: 60%; object-fit: contain;">
-                @endif
+                </div>
             </div>
 
-        @else
-            <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
-                Tidak ada hasil pemeriksaan Audiometer
-            </p>
-        @endif
+            <div class="section-title">PEMERIKSAAN SPIROMETER</div>
 
-    </div>
+            @if(isset($all_pemeriksaan['spirometri_files']) && $all_pemeriksaan['spirometri_files']->count() > 0)
+                @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
+                    @if($spiro->hasilBacaSpirometri)
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th style="width: 20%;">Hasil</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 20%;">Kesimpulan</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>
+                            </tr>
+                        </table>
+                    @endif
+                @endforeach
+
+                @php $firstSpiro = $all_pemeriksaan['spirometri_files']->first(); @endphp
+                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                    @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
+                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
+                                alt="SPIROMETRI"
+                                style="width: 100%; height: 60%; object-fit: contain;">
+                    @endif
+                </div>
+
+            @else
+                <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                    Tidak ada hasil pemeriksaan Spirometer
+                </p>
+            @endif
+
+        </div>
+        @endif
     @endif
 
-     <!-- Page 7: Laboratorium -->
+    <!-- Page 8: Audiometri -->
+    @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'Audiometer'))
+        @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="hospital-logo-container">
+                        <div class="row align-items-center">
+                            <table border="0">
+                                <tr>
+                                    <td>
+                                        <div class="col-2">
+                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                                class="logo">
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="col-10">
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="patient-info">
+                <div class="patient-data">
+                    <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                        @if ($employee->nik)
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                                <td style="width:10px; vertical-align:top;">:</td>
+                                <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                            </tr>
+                        @endif
+                        <tr>
+                            <td style="font-weight:bold;">Nama Lengkap</td>
+                            <td>:</td>
+                            <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-title">PEMERIKSAAN AUDIOMETER</div>
+
+            @if(isset($all_pemeriksaan['audiometri_files']) && $all_pemeriksaan['audiometri_files']->count() > 0)
+                @foreach($all_pemeriksaan['audiometri_files'] as $audio)
+                    @if($audio->hasilBacaAudiometri)
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th style="width: 20%;">Hasil</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->hasil }}</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 20%;">Kesimpulan</th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top; padding: 10px;">{{ $audio->hasilBacaAudiometri->kesimpulan }}</td>
+                            </tr>
+                        </table>
+                    @endif
+                @endforeach
+
+                @php $firstAudio = $all_pemeriksaan['audiometri_files']->first(); @endphp
+                <div style="width: 100%; height: 400px; margin: 0px 0; background: #000; overflow: hidden; margin-top:30px">
+                    @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file)))
+                        <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstAudio->nama_file) }}"
+                                alt="Audiometer"
+                                style="width: 100%; height: 60%; object-fit: contain;">
+                    @endif
+                </div>
+
+            @else
+                <p style="margin: 20px 0; text-align: center; color: #666; font-style: italic;">
+                    Tidak ada hasil pemeriksaan Audiometer
+                </p>
+            @endif
+
+        </div>
+        @endif
+    @endif
+
+     <!-- Page 9: Laboratorium -->
     <div class="page-last">
         <div class="header">
             <div class="header-content">
