@@ -3561,7 +3561,7 @@
             });
 
             // Tampilkan container sesuai jenis dokumen
-            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG') {
+            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG' || jenisDokumen === "Spirometri") {
                 hasilKesimpulanContainer.style.display = 'block';
                 document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
                     textarea.required = true;
