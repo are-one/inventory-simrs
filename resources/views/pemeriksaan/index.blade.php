@@ -3180,6 +3180,7 @@
                                                                                 <option value="">-- Pilih Kategori --</option>
                                                                                 <option value="fit">Fit</option>
                                                                                 <option value="fit_dengan_catatan">Fit dengan Catatan</option>
+                                                                                <option value="temporary_unfit">Temporary Unfit</option>
                                                                                 <option value="unfit">Unfit</option>
                                                                                 <option value="pending">Pending</option>
                                                                             </select>
