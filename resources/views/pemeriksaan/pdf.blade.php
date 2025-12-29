@@ -1788,7 +1788,7 @@
                     @if(file_exists(storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file)))
                         <img src="{{ storage_path('app/public/dokumen-mcu/' . $firstSpiro->nama_file) }}"
                                 alt="SPIROMETRI"
-                                style="width: 100%; object-fit: contain;">
+                                style="height: 60%; object-fit: contain;">
                     @endif
                 </div>
 
