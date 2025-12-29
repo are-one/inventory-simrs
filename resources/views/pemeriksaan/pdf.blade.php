@@ -1042,25 +1042,28 @@
                             @endphp
 
                             @if($imt < 18.5)
-                                <span class="text-blue-600 font-semibold">
+                                <span style="color: #2563eb; font-weight: bold;">
                                     Underweight (IMT: {{ number_format($imt, 1) }})
                                 </span>
                             @elseif($imt >= 18.5 && $imt < 25)
-                                <span class="text-green-600 font-semibold">
+                                <span style="color: #16a34a; font-weight: bold;">
                                     Normal (IMT: {{ number_format($imt, 1) }})
                                 </span>
                             @elseif($imt >= 25 && $imt < 30)
-                                <span class="text-yellow-600 font-semibold">
+                                <span style="color: #ca8a04; font-weight: bold;">
                                     Overweight (IMT: {{ number_format($imt, 1) }})
                                 </span>
                             @else
-                                <span class="text-red-600 font-semibold">
+                                <span style="color: #dc2626; font-weight: bold;">
                                     Obesitas (IMT: {{ number_format($imt, 1) }})
                                 </span>
                             @endif
                         @else
-                            <span class="text-gray-500 italic">Data tinggi / berat badan belum tersedia</span>
+                            <span style="color: #6b7280; font-style: italic;">
+                                Data tinggi / berat badan belum tersedia
+                            </span>
                         @endif
+
 
                     </td>
                 </tr>
