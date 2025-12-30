@@ -551,6 +551,9 @@
                     @case('unfit')
                         <strong>Kategori Hasil : TIDAK FIT</strong>
                         @break
+                    @case('temporary_unfit')
+                        <strong>Kategori Hasil : TEMPORARY UNFIT</strong>
+                        @break
                     @case('pending')
                         <strong>Kategori Hasil : PENDING</strong>
                         @break
