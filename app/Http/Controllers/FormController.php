@@ -1158,7 +1158,7 @@ class FormController extends Controller
                     }
 
                     $fileName = $treadmill->fileTreadmill->nama_file;
-                    $filePath = storage_path('app/public/dokumen-mcu/' . $fileName);
+                    $filePath = storage_path('app/public/dokumen-mcu/treadmill/' . $fileName);
 
                     if (!file_exists($filePath)) {
                         continue;
