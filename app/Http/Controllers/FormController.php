@@ -1172,17 +1172,7 @@ class FormController extends Controller
 
                         for ($i = 1; $i <= $pageCount; $i++) {
                             $tplId = $mpdf->importPage($i);
-                            $size = $mpdf->getTemplateSize($tplId);
-
-                            // Tentukan orientasi otomatis
-                            $orientation = ($size['width'] > $size['height']) ? 'L' : 'P';
-
-                            // Buat halaman sesuai ukuran asli PDF
-                            $mpdf->AddPage(
-                                $orientation,
-                                [$size['width'], $size['height']]
-                            );
-
+                            $mpdf->AddPage();
                             $mpdf->useTemplate($tplId);
                         }
                     }
