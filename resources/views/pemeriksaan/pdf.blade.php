@@ -186,7 +186,6 @@
         }
 
         .conclusion-box, .recommendation-box {
-            page-break-inside: auto;
             background: #e8f4f8;
             padding: 12px;
             margin: 10px 0;
