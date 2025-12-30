@@ -1922,7 +1922,7 @@
     @endif
 
      <!-- Page 9: Laboratorium -->
-    <div class="page" style="margin-bottom: 10px !important;">
+    <div class="page">
         <div class="header">
             <div class="header-content">
                 <div class="hospital-logo-container">
@@ -1992,6 +1992,5 @@
             * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
         </div>
     </div>
-
 </body>
 </html>
