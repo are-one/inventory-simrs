@@ -30,7 +30,7 @@
             width: 100%;
             max-width: 210mm;
             min-height: auto;
-            padding: 0 16px 16px 16px;
+            padding: 16px;
             margin: 0 auto 20px auto;
             background: white;
         }
@@ -338,7 +338,7 @@
             .page-last {
                 width: 210mm;
                 min-height: 297mm;
-                padding: 12mm;
+                padding: 0 12mm 0 12mm;
                 margin: 0;
                 /* HAPUS page-break-after: always; */
                 page-break-after: auto; /* Ganti dengan auto */
