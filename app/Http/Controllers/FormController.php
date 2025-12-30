@@ -1117,8 +1117,6 @@ class FormController extends Controller
 
             $html = view('pemeriksaan.pdf', $data)->render();
 
-
-
             // Set metadata
             $mpdf->SetTitle('Medical Checkup Report - ' . $mcu->employee->nrp);
 
@@ -1148,6 +1146,12 @@ class FormController extends Controller
                     }
                 }
             }
+
+            $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
+
+            $mpdf->AddPage();
+            // Write HTML to PDF
+            $mpdf->WriteHTML($htmlTreadmill);
 
             if (isset($allPemeriksaan['treadmill_files'])) {
                 foreach ($allPemeriksaan['treadmill_files'] as $treadmill) {
