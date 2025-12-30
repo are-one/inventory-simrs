@@ -1921,7 +1921,7 @@
     @endif
 
      <!-- Page 9: Laboratorium -->
-    <div class="page">
+    <div class="page-last">
         <div class="header">
             <div class="header-content">
                 <div class="hospital-logo-container">
