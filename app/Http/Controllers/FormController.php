@@ -872,7 +872,7 @@ class FormController extends Controller
                 'employee_id' => 'required|exists:employees,id',
                 'kesimpulan' => 'required|string',
                 'saran' => 'required|string',
-                'kategori_hasil' => 'required|in:fit,fit_dengan_catatan,unfit,pending',
+                'kategori_hasil' => 'required|in:fit,fit_dengan_catatan,temporary_unfit,unfit,pending',
                 // 'tim_medis' => 'required',
             ]);
 
