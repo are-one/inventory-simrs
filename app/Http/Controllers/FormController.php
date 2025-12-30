@@ -1149,19 +1149,7 @@ class FormController extends Controller
 
             $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
 
-            $mpdf->AddPageByArray([
-                'mode' => 'utf-8',
-                'format' => 'A4',
-                'tempDir' => storage_path('app/mpdf'),
-                'default_font' => 'dejavusans',
-                'margin_top' => 10,
-                'margin_bottom' => 10,
-                'margin_left' => 2,
-                'margin_right' => 2,
-                'margin_header' => 0,
-                'margin_footer' => 0,
-                'orientation' => 'P',
-            ]);
+            $mpdf->AddPageByArray();
             // Write HTML to PDF
             $mpdf->WriteHTML($htmlTreadmill);
 
