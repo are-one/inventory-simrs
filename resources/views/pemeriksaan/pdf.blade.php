@@ -2058,12 +2058,12 @@
                         <tr>
                             <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->hasil }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th style="width: 20%;">Kesimpulan</th>
                         </tr>
                         <tr>
                             <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->kesimpulan }}</td>
-                        </tr>
+                        </tr> --}}
                     </table>
                 @endif
             @endforeach
