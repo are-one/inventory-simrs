@@ -30,7 +30,7 @@
             width: 100%;
             max-width: 210mm;
             min-height: auto;
-            padding: 16px;
+            padding: 0 16px 16px 16px;
             margin: 0 auto 20px auto;
             background: white;
         }
