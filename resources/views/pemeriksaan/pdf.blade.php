@@ -1770,7 +1770,7 @@
                 @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
                     @if($spiro->hasilBacaSpirometri)
                         <table style="margin-top: 15px;">
-                            @if ($radiologi->hasilBacaSpirometri->hasil)
+                            @if ($spiro->hasilBacaSpirometri->hasil)
                                 <tr>
                                     <th style="width: 20%;">Hasil</th>
                                 </tr>
