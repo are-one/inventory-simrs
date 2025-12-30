@@ -1149,45 +1149,35 @@ class FormController extends Controller
                 }
             }
 
-            if (!empty($allPemeriksaan['treadmill_files'])) {
+            if (isset($allPemeriksaan['treadmill_files'])) {
                 foreach ($allPemeriksaan['treadmill_files'] as $treadmill) {
+                    foreach ($treadmill->fileTreadmill as $file) {
+                        $filePath = storage_path('app/public/dokumen-mcu/' . $file->nama_file);
 
-                    // pastikan relasi file ada
-                    if (!$treadmill->fileTreadmill) {
-                        continue;
-                    }
+                        if (!file_exists($filePath)) {
+                            continue;
+                        }
 
-                    $fileName = $treadmill->fileTreadmill->nama_file;
-                    $filePath = storage_path('app/public/dokumen-mcu/treadmill/' . $fileName);
+                        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
 
-                    if (!file_exists($filePath)) {
-                        continue;
-                    }
+                        if ($extension === 'pdf') {
 
-                    $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                            $pageCount = $mpdf->setSourceFile($filePath);
 
-                    // KHUSUS PDF
-                    if ($extension === 'pdf') {
-                        $pageCount = $mpdf->setSourceFile($filePath);
+                            for ($i = 1; $i <= $pageCount; $i++) {
 
-                        for ($i = 1; $i <= $pageCount; $i++) {
-                            $tplId = $mpdf->importPage($i);
-                            $size = $mpdf->getTemplateSize($tplId);
+                                // 🔥 ADD PAGE DULU
+                                $mpdf->AddPage();
 
-                            // Tentukan orientasi otomatis
-                            $orientation = ($size['width'] > $size['height']) ? 'L' : 'P';
-
-                            // Buat halaman sesuai ukuran asli PDF
-                            $mpdf->AddPageByArray([
-                                'orientation' => $orientation,
-                                'format'      => [$size['width'], $size['height']]
-                            ]);
-
-                            $mpdf->useTemplate($tplId);
+                                $tplId = $mpdf->importPage($i);
+                                $mpdf->useTemplate($tplId);
+                            }
                         }
                     }
                 }
             }
+
+
 
 
             // Output PDF

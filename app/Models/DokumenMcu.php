@@ -42,6 +42,6 @@ class DokumenMcu extends Model
 
     public function fileTreadmill()
     {
-        return $this->hasOne(DokumenTreadmill::class);
+        return $this->hasMany(DokumenTreadmill::class, 'dokumen_mcu_id');
     }
 }

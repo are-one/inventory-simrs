@@ -1992,24 +1992,27 @@
         </div>
     </div>
 
+
      <!-- Page 9: Treadmill -->
-     @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'Treadmill'))
         <div class="page-last">
             <div class="section-title">PEMERIKSAAN TREADMILL</div>
             <div style="margin-top: 20px; font-size: 11px;">
                 <p>Daftar lampiran dalam dokumen ini:</p>
-                <ul style="list-style-type: decimal;">
+                <ul>
                     @forelse($all_pemeriksaan['treadmill_files'] as $treadmill)
-                        @if($treadmill->fileTreadmill)
-                            <li>
-                                {{ $treadmill->fileTreadmill->nama_file }}
-                                (Lampiran terlampir di halaman berikutnya)
-                            </li>
-                        @endif
+                    {{-- {{dd($treadmill)}} --}}
+                    {{-- {{dd($treadmill->fileTreadmill)}} --}}
+                        @forelse($treadmill->fileTreadmill as $file)
+                        {{-- {{dd($file)}} --}}
+                            <li>{{ $file->nama_file }}</li>
+                        @empty
+                            <li>Tidak ada file treadmill</li>
+                        @endforelse
                     @empty
-                        <li>Tidak ada file treadmill.</li>
+                        <li>Tidak ada data treadmill</li>
                     @endforelse
                 </ul>
+
             </div>
 
 
@@ -2017,6 +2020,5 @@
                 * Dokumen ini digenerate otomatis oleh sistem. Hasil treadmill yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
             </div>
         </div>
-    @endif
 </body>
 </html>
