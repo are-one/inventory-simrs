@@ -185,8 +185,12 @@
             margin: 15px 0 8px 0;
         }
 
-        .conclusion-box, .recommendation-box {
+        .conclusion-box,
+        .recommendation-box {
             page-break-inside: auto;
+        }
+
+        .conclusion-box, .recommendation-box {
             background: #e8f4f8;
             padding: 12px;
             margin: 10px 0;
