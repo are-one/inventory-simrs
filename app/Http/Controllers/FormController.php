@@ -1149,7 +1149,7 @@ class FormController extends Controller
 
             $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
 
-            $mpdf->AddPageByArray();
+            $mpdf->AddPage();
             // Write HTML to PDF
             $mpdf->WriteHTML($htmlTreadmill);
 
