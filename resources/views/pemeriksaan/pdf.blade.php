@@ -1770,18 +1770,20 @@
                 @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
                     @if($spiro->hasilBacaSpirometri)
                         <table style="margin-top: 15px;">
-                            <tr>
-                                <th style="width: 20%;">Hasil</th>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
-                            </tr>
-                            <tr>
-                                <th style="width: 20%;">Kesimpulan</th>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>
-                            </tr>
+                            @if ($radiologi->hasilBacaSpirometri->hasil)
+                                <tr>
+                                    <th style="width: 20%;">Hasil</th>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
+                                </tr>
+                            @endif
+{{--                            <tr>--}}
+{{--                                <th style="width: 20%;">Kesimpulan</th>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>--}}
+{{--                            </tr>--}}
                         </table>
                     @endif
                 @endforeach
