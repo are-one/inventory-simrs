@@ -186,6 +186,7 @@
         }
 
         .conclusion-box, .recommendation-box {
+            page-break-inside: auto;
             background: #e8f4f8;
             padding: 12px;
             margin: 10px 0;
@@ -331,7 +332,7 @@
                 margin: 0;
                 /* HAPUS page-break-after: always; */
                 page-break-after: auto; /* Ganti dengan auto */
-                page-break-inside: avoid;
+                page-break-inside: auto;
             }
 
             .page-last {
