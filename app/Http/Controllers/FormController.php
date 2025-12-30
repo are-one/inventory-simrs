@@ -1014,6 +1014,12 @@ class FormController extends Controller
             },
             'dokumenAudiometri' => function ($query) {
                 $query->with('hasilBacaAudiometri');
+            },
+            'dokumenTreadmill' => function ($query) {
+                $query->with([
+                    'hasilBacaTreadmill',
+                    'fileTreadmill'
+                ]);
             }
         ])->findOrFail($mcuId);
 
@@ -1042,6 +1048,7 @@ class FormController extends Controller
             'ekg_files' => $mcu->dokumenEkg,
             'spirometri_files' => $mcu->dokumenSpirometri,
             'audiometri_files' => $mcu->dokumenAudiometri,
+            'treadmill_files' => $mcu->dokumenTreadmill,
             'hasil_pemeriksaan' => $mcu->hasilPemeriksaan,
         ];
     }

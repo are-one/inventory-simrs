@@ -163,4 +163,9 @@ class MedicalCheckUp extends Model
         return $this->hasMany(DokumenMcu::class, 'mcu_id')
             ->where('jenis_dokumen', 'Audiometri');
     }
+    public function dokumenTreadmill()
+    {
+        return $this->hasMany(DokumenMcu::class, 'mcu_id')
+            ->where('jenis_dokumen', 'Treadmill');
+    }
 }
