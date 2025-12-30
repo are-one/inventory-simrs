@@ -1172,16 +1172,7 @@ class FormController extends Controller
 
                         for ($i = 1; $i <= $pageCount; $i++) {
                             $tplId = $mpdf->importPage($i);
-                            $size = $mpdf->getTemplateSize($tplId);
-
-                            // Tentukan orientasi otomatis
-                            $orientation = ($size['width'] > $size['height']) ? 'L' : 'P';
-
-                            $mpdf->AddPage([
-                                'orientation' => $orientation,
-                                'sheet-size'  => [$size['width'], $size['height']]
-                            ]);
-
+                            $mpdf->AddPage();
                             $mpdf->useTemplate($tplId);
                         }
                     }
