@@ -2049,6 +2049,24 @@
                 </div>
             </div>
             <div class="section-title">PEMERIKSAAN TREADMILL</div>
+            @foreach($all_pemeriksaan['treadmill_files'] as $treadmills)
+                @if($treadmills->hasilBacaTreadmill)
+                    <table style="margin-top: 15px;">
+                        <tr>
+                            <th style="width: 20%;">Hasil</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->hasil }}</td>
+                        </tr>
+                        <tr>
+                            <th style="width: 20%;">Kesimpulan</th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->kesimpulan }}</td>
+                        </tr>
+                    </table>
+                @endif
+            @endforeach
             <div style="margin-top: 20px; font-size: 11px;">
                 <p>Daftar lampiran dalam dokumen ini:</p>
                 <ul>
