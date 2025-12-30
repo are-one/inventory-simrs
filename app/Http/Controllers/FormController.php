@@ -1152,7 +1152,7 @@ class FormController extends Controller
             if (isset($allPemeriksaan['treadmill_files'])) {
                 foreach ($allPemeriksaan['treadmill_files'] as $treadmill) {
                     foreach ($treadmill->fileTreadmill as $file) {
-                        $filePath = storage_path('app/public/dokumen-mcu/' . $file->nama_file);
+                        $filePath = storage_path('app/public/dokumen-mcu/treadmill/' . $file->nama_file);
 
                         if (!file_exists($filePath)) {
                             continue;
