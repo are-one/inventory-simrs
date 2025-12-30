@@ -1106,7 +1106,7 @@ class FormController extends Controller
                 'tempDir' => storage_path('app/mpdf'),
                 'default_font' => 'dejavusans',
                 'margin_top' => 0,
-                'margin_bottom' => 0,
+                'margin_bottom' => 5,
                 'margin_left' => 2,
                 'margin_right' => 2,
                 'margin_header' => 0,
