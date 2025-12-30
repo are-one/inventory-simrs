@@ -3009,7 +3009,7 @@
                                                                                 <option value="EKG">EKG</option>
                                                                                 <option value="Radiologi">Radiologi</option>
                                                                                 <option value="Audiometri">Audiometri</option>
-                                                                                <option value="Spirometri">Spirometri</option>
+                                                                                {{--<option value="Spirometri">Spirometri</option>--}}
                                                                                 <option value="Lainnya">Lainnya</option>
                                                                             </select>
                                                                         </div>
