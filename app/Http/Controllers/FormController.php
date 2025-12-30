@@ -1149,6 +1149,36 @@ class FormController extends Controller
                 }
             }
 
+            if (!empty($allPemeriksaan['treadmill_files'])) {
+                foreach ($allPemeriksaan['treadmill_files'] as $treadmill) {
+
+                    // pastikan relasi file ada
+                    if (!$treadmill->fileTreadmill) {
+                        continue;
+                    }
+
+                    $fileName = $treadmill->fileTreadmill->nama_file;
+                    $filePath = storage_path('app/public/dokumen-mcu/' . $fileName);
+
+                    if (!file_exists($filePath)) {
+                        continue;
+                    }
+
+                    $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                    // KHUSUS PDF
+                    if ($extension === 'pdf') {
+                        $pageCount = $mpdf->setSourceFile($filePath);
+
+                        for ($i = 1; $i <= $pageCount; $i++) {
+                            $tplId = $mpdf->importPage($i);
+                            $mpdf->AddPage();
+                            $mpdf->useTemplate($tplId);
+                        }
+                    }
+                }
+            }
+
 
             // Output PDF
             $filename = $mcu->employee->nama . '_' . $mcu->employee->nrp . '.pdf';

@@ -1991,5 +1991,83 @@
             * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
         </div>
     </div>
+
+     <!-- Page 9: Treadmill -->
+    <div class="page-last">
+        <div class="header">
+            <div class="header-content">
+                <div class="hospital-logo-container">
+                    <div class="row align-items-center">
+                        <table border="0">
+                            <tr>
+                                <td>
+                                    <div class="col-2">
+                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            class="logo">
+                                    </div>
+                                </td>
+
+                                 <td class="text-center">
+                                    <div class="col-10">
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-info">
+            <div class="patient-data">
+                <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                     @if ($employee->nik)
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td style="font-weight:bold;">Nama Lengkap</td>
+                        <td>:</td>
+                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-title">PEMERIKSAAN TREADMILL</div>
+        <div style="margin-top: 20px; font-size: 11px;">
+            <p>Daftar lampiran dalam dokumen ini:</p>
+            <ul style="list-style-type: decimal;">
+                @forelse($all_pemeriksaan['treadmill_files'] as $treadmill)
+                    @if($treadmill->fileTreadmill)
+                        <li>
+                            {{ $treadmill->fileTreadmill->nama_file }}
+                            (Lampiran terlampir di halaman berikutnya)
+                        </li>
+                    @endif
+                @empty
+                    <li>Tidak ada file treadmill.</li>
+                @endforelse
+            </ul>
+        </div>
+
+
+        <div style="margin-top: 50px; font-size: 10px; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
+            * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
+        </div>
+    </div>
 </body>
 </html>
