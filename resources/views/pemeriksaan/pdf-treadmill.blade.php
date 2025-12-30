@@ -186,6 +186,7 @@
         }
 
         .conclusion-box, .recommendation-box {
+            page-break-inside: auto;
             background: #e8f4f8;
             padding: 12px;
             margin: 10px 0;
@@ -327,7 +328,7 @@
             .page {
                 width: 210mm;
                 min-height: 297mm;
-                padding: 12mm;
+                padding: 0 12mm 0 12mm;
                 margin: 0;
                 /* HAPUS page-break-after: always; */
                 page-break-after: always; /* Ganti dengan auto */
