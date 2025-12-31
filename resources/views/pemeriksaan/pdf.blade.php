@@ -1921,7 +1921,7 @@
     @endif
 
      <!-- Page 9: Laboratorium -->
-    @if ($mcu->jenisPemeriksaans->contains('nama_pemeriksaan', 'Laboratorium'))
+
         <div class="page-last">
             <div class="header">
                 <div class="header-content">
@@ -1992,6 +1992,6 @@
                 * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
             </div>
         </div>
-    @endif
+
 </body>
 </html>
