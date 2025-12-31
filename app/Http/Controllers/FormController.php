@@ -1147,13 +1147,14 @@ class FormController extends Controller
                 }
             }
 
-            $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
-
-            $mpdf->AddPage();
-            // Write HTML to PDF
-            $mpdf->WriteHTML($htmlTreadmill);
-
             if (isset($allPemeriksaan['treadmill_files'])) {
+
+                $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
+
+                $mpdf->AddPage();
+                // Write HTML to PDF
+                $mpdf->WriteHTML($htmlTreadmill);
+
                 foreach ($allPemeriksaan['treadmill_files'] as $treadmill) {
                     foreach ($treadmill->fileTreadmill as $file) {
                         $filePath = storage_path('app/public/dokumen-mcu/treadmill/' . $file->nama_file);
