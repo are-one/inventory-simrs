@@ -452,7 +452,7 @@
                                     <tr>
                                         <td style="font-weight:bold;">Jenis Kelamin</td>
                                         <td>:</td>
-                                        <td>{{ $employee->jenis_kelamin == 'L' ? 'Pria' : 'Wanita' }}</td>
+                                        <td>{{ $employee->jenis_kelamin == 'L' ? 'Pria' : 'Perempuan' }}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight:bold; vertical-align:top;">Tanggal Lahir</td>
