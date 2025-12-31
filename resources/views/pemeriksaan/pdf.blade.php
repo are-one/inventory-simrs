@@ -489,7 +489,7 @@
                                             <img src="{{ $base64 }}" alt="Foto" style="width: 100px;">
                                         @else
                                             @php
-                                                $data = file_get_contents($path."default_avatar.png");
+                                                $data = file_get_contents($path."/default_avatar.png");
                                                 $base64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode($data);
                                             @endphp
                                             <img src="{{ $base64 }}" alt="Foto" style="width: 100px;">
