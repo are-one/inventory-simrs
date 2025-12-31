@@ -341,7 +341,7 @@
                 padding: 0 12mm 0 12mm;
                 margin: 0;
                 /* HAPUS page-break-after: always; */
-                page-break-after: always; /* Ganti dengan auto */
+                page-break-after: avoid; /* Ganti dengan auto */
                 page-break-inside: avoid;
             }
 
