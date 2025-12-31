@@ -489,8 +489,9 @@
                                             <img src="{{ $base64 }}" alt="Foto" style="width: 100px;">
                                         @else
                                             @php
-                                                $data = file_get_contents($path."/default_avatar.png");
-                                                $base64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode($data);
+                                                    $path = storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'employee-mcu-foto' . DIRECTORY_SEPARATOR . 'default_avatar.png');
+                                                    $data = file_get_contents($path);
+                                                    $base64 = 'data:image/' . pathinfo($path, PATHINFO_EXTENSION) . ';base64,' . base64_encode($data);
                                             @endphp
                                             <img src="{{ $base64 }}" alt="Foto" style="width: 100px;">
                                             {{--<p style="color:red;">File tidak ditemukan di: {{ $path }}</p>--}}
