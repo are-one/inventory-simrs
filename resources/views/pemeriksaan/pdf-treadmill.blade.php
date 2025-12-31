@@ -488,6 +488,6 @@
             * Dokumen ini digenerate otomatis oleh sistem. Hasil treadmill yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
         </div>
     </div>
-@endif
+   @endif
 </body>
 </html>
