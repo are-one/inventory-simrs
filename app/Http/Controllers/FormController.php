@@ -1147,7 +1147,7 @@ class FormController extends Controller
                 }
             }
 
-            if (!empty($allPemeriksaan['treadmill_files'])){
+            if (count($allPemeriksaan['treadmill_files']) > 0){
                 $htmlTreadmill = view('pemeriksaan.pdf-treadmill', $data)->render();
 
                 $mpdf->AddPage();
