@@ -3022,7 +3022,7 @@
                                                                                 name="file"
                                                                                 id="fileInput"
                                                                                 class="form-control">
-                                                                            <small class="text-muted">
+                                                                            <small class="text-muted" id="fileHelpText">
                                                                                 PDF / JPG / PNG (Maks 5MB)
                                                                             </small>
                                                                         </div>
@@ -3617,6 +3617,129 @@
         }
 
         // Event listener untuk menampilkan/menyembunyikan form hasil & kesimpulan
+        // document.getElementById('jenisDokumenSelect').addEventListener('change', function () {
+        //     const jenisDokumen = this.value;
+
+        //     const hasilKesimpulanContainer = document.getElementById('hasilKesimpulanContainer');
+        //     const radiologiContainer      = document.getElementById('radiologiContainer');
+        //     const audiometriContainer     = document.getElementById('audiometriContainer');
+        //     const spirometerContainer     = document.getElementById('spirometerContainer');
+        //     const treadmillContainer      = document.getElementById('treadmillContainer');
+        //     const fileInput               = document.getElementById('fileInput');
+
+        //     const allContainers = [
+        //         hasilKesimpulanContainer,
+        //         radiologiContainer,
+        //         audiometriContainer,
+        //         spirometerContainer,
+        //         treadmillContainer
+        //     ];
+
+        //     // =================================================
+        //     // HELPER: ENABLE / DISABLE INPUT DALAM CONTAINER
+        //     // =================================================
+        //     function setContainerEnabled(container, enabled) {
+        //         if (!container) return;
+        //         container.querySelectorAll('input, textarea, select').forEach(el => {
+        //             el.disabled = !enabled;
+        //         });
+        //     }
+
+        //     // =================================================
+        //     // RESET SEMUA CONTAINER
+        //     // =================================================
+        //     allContainers.forEach(container => {
+        //         if (!container) return;
+        //         container.style.display = 'none';
+        //         setContainerEnabled(container, false);
+        //     });
+
+        //     // Reset input file
+        //     fileInput.removeAttribute('multiple');
+        //     fileInput.name = 'file';
+        //     fileInput.value = '';
+
+        //     // Reset required attribute
+        //     document.querySelectorAll('input, textarea').forEach(el => {
+        //         if (
+        //             el.type !== 'file' &&
+        //             el.type !== 'hidden' &&
+        //             el.name !== '_token'
+        //         ) {
+        //             el.required = false;
+        //         }
+        //     });
+
+        //     // =================================================
+        //     // LOGIKA PER JENIS DOKUMEN
+        //     // =================================================
+
+        //     // =========================
+        //     // EKG
+        //     // =========================
+        //     if (jenisDokumen === 'EKG') {
+        //         hasilKesimpulanContainer.style.display = 'block';
+        //         setContainerEnabled(hasilKesimpulanContainer, true);
+
+        //         hasilKesimpulanContainer
+        //             .querySelectorAll('textarea')
+        //             .forEach(el => el.required = true);
+        //     }
+
+        //     // =========================
+        //     // RADIOLOGI
+        //     // =========================
+        //     else if (jenisDokumen === 'Radiologi') {
+        //         radiologiContainer.style.display = 'block';
+        //         setContainerEnabled(radiologiContainer, true);
+
+        //         radiologiContainer
+        //             .querySelectorAll('textarea')
+        //             .forEach(el => el.required = true);
+        //     }
+
+        //     // =========================
+        //     // AUDIOMETRI
+        //     // =========================
+        //     else if (jenisDokumen === 'Audiometri') {
+        //         audiometriContainer.style.display = 'block';
+        //         setContainerEnabled(audiometriContainer, true);
+
+        //         audiometriContainer
+        //             .querySelectorAll('input, textarea')
+        //             .forEach(el => el.required = true);
+        //     }
+
+        //     // =========================
+        //     // SPIROMETRI
+        //     // =========================
+        //     else if (jenisDokumen === 'Spirometri') {
+        //         spirometerContainer.style.display = 'block';
+        //         setContainerEnabled(spirometerContainer, true);
+
+        //         spirometerContainer
+        //             .querySelectorAll('textarea')
+        //             .forEach(el => el.required = true);
+        //     }
+
+        //     // =========================
+        //     // TREADMILL
+        //     // =========================
+        //     else if (jenisDokumen === 'Treadmill') {
+        //         treadmillContainer.style.display = 'block';
+        //         setContainerEnabled(treadmillContainer, true);
+
+        //         // multi file
+        //         fileInput.setAttribute('multiple', 'multiple');
+        //         fileInput.name = 'file[]';
+
+        //         const kesimpulanTreadmill = document.getElementById('kesimpulanTreadmillInput');
+        //         if (kesimpulanTreadmill) {
+        //             kesimpulanTreadmill.required = true;
+        //         }
+        //     }
+        // });
+
         document.getElementById('jenisDokumenSelect').addEventListener('change', function () {
             const jenisDokumen = this.value;
 
@@ -3626,6 +3749,7 @@
             const spirometerContainer     = document.getElementById('spirometerContainer');
             const treadmillContainer      = document.getElementById('treadmillContainer');
             const fileInput               = document.getElementById('fileInput');
+            const fileHelpText            = document.getElementById('fileHelpText');
 
             const allContainers = [
                 hasilKesimpulanContainer,
@@ -3635,9 +3759,6 @@
                 treadmillContainer
             ];
 
-            // =================================================
-            // HELPER: ENABLE / DISABLE INPUT DALAM CONTAINER
-            // =================================================
             function setContainerEnabled(container, enabled) {
                 if (!container) return;
                 container.querySelectorAll('input, textarea, select').forEach(el => {
@@ -3645,21 +3766,20 @@
                 });
             }
 
-            // =================================================
-            // RESET SEMUA CONTAINER
-            // =================================================
+            // ================= RESET =================
             allContainers.forEach(container => {
                 if (!container) return;
                 container.style.display = 'none';
                 setContainerEnabled(container, false);
             });
 
-            // Reset input file
             fileInput.removeAttribute('multiple');
+            fileInput.removeAttribute('accept');
             fileInput.name = 'file';
             fileInput.value = '';
 
-            // Reset required attribute
+            fileHelpText.textContent = 'PDF / JPG / PNG (Maks 5MB)';
+
             document.querySelectorAll('input, textarea').forEach(el => {
                 if (
                     el.type !== 'file' &&
@@ -3670,75 +3790,70 @@
                 }
             });
 
-            // =================================================
-            // LOGIKA PER JENIS DOKUMEN
-            // =================================================
+            // ================= LOGIKA =================
 
-            // =========================
-            // EKG
-            // =========================
             if (jenisDokumen === 'EKG') {
                 hasilKesimpulanContainer.style.display = 'block';
                 setContainerEnabled(hasilKesimpulanContainer, true);
-
-                hasilKesimpulanContainer
-                    .querySelectorAll('textarea')
+                hasilKesimpulanContainer.querySelectorAll('textarea')
                     .forEach(el => el.required = true);
+
+                fileInput.accept = 'image/jpeg,image/png';
+                fileHelpText.textContent = 'JPG / PNG (Maks 5MB)';
             }
 
-            // =========================
-            // RADIOLOGI
-            // =========================
             else if (jenisDokumen === 'Radiologi') {
                 radiologiContainer.style.display = 'block';
                 setContainerEnabled(radiologiContainer, true);
-
-                radiologiContainer
-                    .querySelectorAll('textarea')
+                radiologiContainer.querySelectorAll('textarea')
                     .forEach(el => el.required = true);
+
+                fileInput.accept = 'image/jpeg,image/png';
+                fileHelpText.textContent = 'JPG / PNG (Maks 5MB)';
             }
 
-            // =========================
-            // AUDIOMETRI
-            // =========================
             else if (jenisDokumen === 'Audiometri') {
                 audiometriContainer.style.display = 'block';
                 setContainerEnabled(audiometriContainer, true);
-
-                audiometriContainer
-                    .querySelectorAll('input, textarea')
+                audiometriContainer.querySelectorAll('input, textarea')
                     .forEach(el => el.required = true);
+
+                fileInput.accept = 'image/jpeg,image/png';
+                fileHelpText.textContent = 'JPG / PNG (Maks 5MB)';
             }
 
-            // =========================
-            // SPIROMETRI
-            // =========================
             else if (jenisDokumen === 'Spirometri') {
                 spirometerContainer.style.display = 'block';
                 setContainerEnabled(spirometerContainer, true);
-
-                spirometerContainer
-                    .querySelectorAll('textarea')
+                spirometerContainer.querySelectorAll('textarea')
                     .forEach(el => el.required = true);
+
+                fileInput.accept = 'image/jpeg,image/png';
+                fileHelpText.textContent = 'JPG / PNG (Maks 5MB)';
             }
 
-            // =========================
-            // TREADMILL
-            // =========================
             else if (jenisDokumen === 'Treadmill') {
                 treadmillContainer.style.display = 'block';
                 setContainerEnabled(treadmillContainer, true);
 
-                // multi file
                 fileInput.setAttribute('multiple', 'multiple');
                 fileInput.name = 'file[]';
+                fileInput.accept = 'application/pdf';
+
+                fileHelpText.textContent = 'PDF saja (Maks 5MB per file)';
 
                 const kesimpulanTreadmill = document.getElementById('kesimpulanTreadmillInput');
                 if (kesimpulanTreadmill) {
                     kesimpulanTreadmill.required = true;
                 }
             }
+
+            else if (jenisDokumen === 'Laboratorium') {
+                fileInput.accept = 'application/pdf';
+                fileHelpText.textContent = 'PDF saja (Maks 5MB)';
+            }
         });
+
 
 
 
@@ -3909,6 +4024,17 @@
                         </div>
                     ` : '';
 
+                    let fileLabel = '';
+                    let fileUrl   = '#';
+
+                    if (item.jenis_dokumen === 'Treadmill') {
+                        fileLabel = 'File terupload';
+                        fileUrl   = item.url;
+                    } else {
+                        fileLabel = item.nama_file;
+                        fileUrl   = item.url;
+                    }
+
                     tbody.insertAdjacentHTML('beforeend', `
                         <tr>
                             <td>${index + 1}</td>
@@ -3917,8 +4043,10 @@
                                 ${hasilInfo}
                                 ${kesimpulanInfo}
                             </td>
-                            <td>
-                                <a href="${item.url}" target="_blank">${item.nama_file}</a>
+                           <td>
+                                <a href="${fileUrl}" target="_blank" class="text-decoration-none">
+                                    ${fileLabel}
+                                </a>
                             </td>
                             <td class="text-center">
                                 <button type="button"
@@ -3941,6 +4069,8 @@
                 `;
             }
         }
+
+
 
         async function hapusDokumen(id) {
             if (!confirm('Yakin ingin menghapus dokumen ini?')) return;

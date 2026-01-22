@@ -1769,12 +1769,12 @@
                 @foreach($all_pemeriksaan['spirometri_files'] as $spiro)
                     @if($spiro->hasilBacaSpirometri)
                         <table style="margin-top: 15px;">
-                            @if ($spiro->hasilBacaSpirometri->hasil)
+                            @if ($spiro->hasilBacaSpirometri->kesimpulan)
                                 <tr>
                                     <th style="width: 20%;">Hasil</th>
                                 </tr>
                                 <tr>
-                                    <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
+                                    <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>
                                 </tr>
                             @endif
                         </table>
