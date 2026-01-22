@@ -6,10 +6,12 @@ use App\Models\DokumenMcu;
 use App\Models\Employee;
 use App\Models\MedicalCheckUp;
 use App\Models\Dataawal;
+use App\Models\DokumenTreadmill;
 use App\Models\HasilBacaAudiometri;
 use App\Models\HasilBacaEkg;
 use App\Models\HasilBacaRadiologi;
 use App\Models\HasilBacaSpirometri;
+use App\Models\HasilBacaTreadmill;
 use App\Models\HasilPemeriksaan;
 use App\Models\KategoriMcu;
 use App\Models\Kebiasaan;
@@ -701,31 +703,20 @@ class FormController extends Controller
 
     public function storeDokumenPemeriksaan(Request $request)
     {
-
         try {
+
+            // ===============================
+            // VALIDASI
+            // ===============================
             $request->validate([
-                'employee_id' => 'required|exists:employees,id',
-                'jenis_dokumen' => 'required|string|max:100|in:Laboratorium,EKG,Radiologi,Audiometri,Spirometri,Lainnya',
-                'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'employee_id'   => 'required|exists:employees,id',
+                'jenis_dokumen' => 'required|in:Laboratorium,EKG,Radiologi,Audiometri,Spirometri,Treadmill,Lainnya',
+                'file.*'        => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ]);
 
-            if ($request->jenis_dokumen === 'Radiologi') {
+            if (in_array($request->jenis_dokumen, ['Radiologi', 'EKG', 'Spirometri', 'Treadmill'])) {
                 $request->validate([
-                    'hasil' => 'nullable|string',
-                    'kesimpulan' => 'nullable|string',
-                ]);
-            }
-
-            if ($request->jenis_dokumen === 'EKG') {
-                $request->validate([
-                    'hasil' => 'nullable|string',
-                    'kesimpulan' => 'nullable|string',
-                ]);
-            }
-
-            if ($request->jenis_dokumen === 'Spirometri') {
-                $request->validate([
-                    'hasil' => 'nullable|string',
+                    'hasil'      => 'nullable|string',
                     'kesimpulan' => 'nullable|string',
                 ]);
             }
@@ -733,88 +724,128 @@ class FormController extends Controller
             if ($request->jenis_dokumen === 'Audiometri') {
                 $request->validate([
                     'telinga_kanan' => 'nullable|string',
-                    'telinga_kiri' => 'nullable|string',
-                    'kesimpulan' => 'nullable|string',
+                    'telinga_kiri'  => 'nullable|string',
+                    'kesimpulan'    => 'nullable|string',
                 ]);
             }
 
-
-
+            // ===============================
+            // MCU
+            // ===============================
             $mcu = $this->getOrCreateMCU($request->employee_id);
 
-            // DEFAULT FILE NULL
-            $fileName = null;
-
-            // UPLOAD FILE JIKA ADA
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('dokumen-mcu', $fileName, 'public');
-            }
-
-            // SIMPAN DOKUMEN MCU
-            $dokumen = DokumenMcu::create([
-                'mcu_id' => $mcu->id,
+            // ===============================
+            // BUAT DOKUMEN MCU (SELALU 1)
+            // ===============================
+            $dokumenMcu = DokumenMcu::create([
+                'mcu_id'        => $mcu->id,
                 'jenis_dokumen' => $request->jenis_dokumen,
-                'nama_file' => $fileName, // bisa NULL
+                'nama_file'     => null, // treadmill tidak simpan file di sini
             ]);
 
-            if ($request->jenis_dokumen === 'Radiologi') {
-                HasilBacaRadiologi::create([
-                    'dokumen_mcu_id' => $dokumen->id,
-                    'hasil' => $request->hasil,
-                    'kesimpulan' => $request->kesimpulan,
-                ]);
+            // ===============================
+            // UPLOAD FILE
+            // ===============================
+            if ($request->hasFile('file')) {
+
+                // ===============================
+                // TREADMILL → MULTI FILE
+                // ===============================
+                if ($request->jenis_dokumen === 'Treadmill') {
+
+                    foreach ($request->file('file') as $file) {
+                        $fileName = time() . '_' . uniqid() . '_' . $file->getClientOriginalName();
+                        $file->storeAs('dokumen-mcu', $fileName, 'public');
+
+                        DokumenTreadmill::create([
+                            'dokumen_mcu_id' => $dokumenMcu->id,
+                            'nama_file'      => $fileName,
+                        ]);
+                    }
+                }
+                // ===============================
+                // JENIS LAIN → SINGLE FILE
+                // ===============================
+                else {
+                    $file = $request->file('file');
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+                    $file->storeAs('dokumen-mcu', $fileName, 'public');
+
+                    $dokumenMcu->update([
+                        'nama_file' => $fileName
+                    ]);
+                }
             }
 
-            if ($request->jenis_dokumen === 'EKG') {
-                HasilBacaEkg::create([
-                    'dokumen_mcu_id' => $dokumen->id,
-                    'hasil' => $request->hasil,
-                    'kesimpulan' => $request->kesimpulan,
-                ]);
-            }
+            // ===============================
+            // SIMPAN HASIL PEMERIKSAAN (1x)
+            // ===============================
+            switch ($request->jenis_dokumen) {
 
-            if ($request->jenis_dokumen === 'Spirometri') {
-                HasilBacaSpirometri::create([
-                    'dokumen_mcu_id' => $dokumen->id,
-                    'hasil' => $request->hasil,
-                    'kesimpulan' => $request->kesimpulan,
-                ]);
-            }
+                case 'Radiologi':
+                    HasilBacaRadiologi::create([
+                        'dokumen_mcu_id' => $dokumenMcu->id,
+                        'hasil'          => $request->hasil,
+                        'kesimpulan'     => $request->kesimpulan,
+                    ]);
+                    break;
 
-            if ($request->jenis_dokumen === 'Audiometri') {
-                HasilBacaAudiometri::create([
-                    'dokumen_mcu_id' => $dokumen->id,
-                    'telinga_kanan' => $request->telinga_kanan,
-                    'telinga_kiri' => $request->telinga_kiri,
-                    'kesimpulan' => $request->kesimpulan,
-                ]);
+                case 'EKG':
+                    HasilBacaEkg::create([
+                        'dokumen_mcu_id' => $dokumenMcu->id,
+                        'hasil'          => $request->hasil,
+                        'kesimpulan'     => $request->kesimpulan,
+                    ]);
+                    break;
+
+                case 'Spirometri':
+                    HasilBacaSpirometri::create([
+                        'dokumen_mcu_id' => $dokumenMcu->id,
+                        'hasil'          => $request->hasil,
+                        'kesimpulan'     => $request->kesimpulan,
+                    ]);
+                    break;
+
+                case 'Treadmill':
+                    HasilBacaTreadmill::create([
+                        'dokumen_mcu_id' => $dokumenMcu->id,
+                        'hasil'          => $request->hasil,
+                        'kesimpulan'     => $request->kesimpulan,
+                    ]);
+                    break;
+
+                case 'Audiometri':
+                    HasilBacaAudiometri::create([
+                        'dokumen_mcu_id' => $dokumenMcu->id,
+                        'telinga_kanan'  => $request->telinga_kanan,
+                        'telinga_kiri'   => $request->telinga_kiri,
+                        'kesimpulan'     => $request->kesimpulan,
+                    ]);
+                    break;
             }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Dokumen pemeriksaan berhasil diupload',
                 'data' => [
-                    'dokumen_id' => $dokumen->id,
-                    'jenis_dokumen' => $dokumen->jenis_dokumen,
+                    'dokumen_mcu_id' => $dokumenMcu->id,
+                    'jenis_dokumen'  => $dokumenMcu->jenis_dokumen,
                 ]
             ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validasi gagal',
-                'errors' => $e->errors()
+                'errors'  => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Terjadi kesalahan server',
-                'error' => $e->getMessage()
+                'error'   => $e->getMessage()
             ], 500);
         }
     }
-
 
     public function getDokumenPemeriksaan($employeeId)
     {

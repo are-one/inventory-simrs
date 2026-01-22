@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan MCU - RSUD Konawe</title>
+    <title>MCU - Surya Medical Center</title>
     <style>
         * {
             margin: 0;
@@ -74,7 +74,7 @@
         .hospital-name {
             font-size: 14px;
             font-weight: bold;
-            color: #1e5a9e;
+            color: #f10c21;
             margin-bottom: 3px;
         }
 
@@ -400,16 +400,16 @@
                             <tr>
                                 <td>
                                     <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                             class="logo">
                                     </div>
                                 </td>
 
                                  <td class="text-center">
                                     <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                         <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                         </p>
                                     </div>
                                 </td>
@@ -521,7 +521,7 @@
                 <tr>
                     <td style="font-weight:bold;">Tanggal Kunjungan / Lokasi</td>
                     <td>:</td>
-                    <td>{{ \Carbon\Carbon::parse($mcu->tanggal_mcu)->format('d F Y') }} / Routa (Konawe)</td>
+                    <td>{{ \Carbon\Carbon::parse($mcu->tanggal_mcu)->format('d F Y') }}</td>
                 </tr>
             </table>
         </div>
@@ -575,15 +575,7 @@
                             <h4 style="margin-bottom: 10px; color: #1e5a9e;">TIM MEDIS:</h4><br>
 
                             <div style="font-size: 10px; line-height: 1.4;">
-                                1. dr. Hj. Ucy Nadjmiyah, Sp. PK.<br>
-                                2. dr. Joddy Satrio Ariezal<br>
-                                3. dr. Budi Arisandi<br>
-                                4. dr. Muh. Yusni Chandratirta A<br>
-                                5. dr. Aspita Riskiana<br>
-                                6. dr. Sovia Pratwi Lahida<br>
-                                7. dr. Abdianto Ilman<br>
-                                8. dr. Ade Chandra Multazazam<br>
-                                9. dr. Nur Sahfahria<br>
+                                <b>1. dr. Muh. Yusni Chandratirta Adhiyaksa M.</b>
                             </div>
                         </div>
                     </td>
@@ -635,16 +627,16 @@
                             <tr>
                                 <td>
                                     <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                             class="logo">
                                     </div>
                                 </td>
 
                                  <td class="text-center">
                                     <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                         <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                         </p>
                                     </div>
                                 </td>
@@ -909,15 +901,16 @@
                             <tr>
                                 <td>
                                     <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                             class="logo">
                                     </div>
                                 </td>
+
                                  <td class="text-center">
                                     <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                         <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                         </p>
                                     </div>
                                 </td>
@@ -1273,16 +1266,16 @@
                             <tr>
                                 <td>
                                     <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                             class="logo">
                                     </div>
                                 </td>
 
                                  <td class="text-center">
                                     <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                         <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                         </p>
                                     </div>
                                 </td>
@@ -1518,16 +1511,16 @@
                                 <tr>
                                     <td>
                                         <div class="col-2">
-                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                                 class="logo">
                                         </div>
                                     </td>
 
-                                    <td class="text-center">
+                                     <td class="text-center">
                                         <div class="col-10">
-                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                             <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                                Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                             </p>
                                         </div>
                                     </td>
@@ -1628,16 +1621,16 @@
                                 <tr>
                                     <td>
                                         <div class="col-2">
-                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                                 class="logo">
                                         </div>
                                     </td>
 
-                                    <td class="text-center">
+                                     <td class="text-center">
                                         <div class="col-10">
-                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                             <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                                Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                             </p>
                                         </div>
                                     </td>
@@ -1725,16 +1718,16 @@
                                 <tr>
                                     <td>
                                         <div class="col-2">
-                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                                 class="logo">
                                         </div>
                                     </td>
 
-                                    <td class="text-center">
+                                     <td class="text-center">
                                         <div class="col-10">
-                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                             <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                                Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                             </p>
                                         </div>
                                     </td>
@@ -1784,12 +1777,6 @@
                                     <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->hasil }}</td>
                                 </tr>
                             @endif
-{{--                            <tr>--}}
-{{--                                <th style="width: 20%;">Kesimpulan</th>--}}
-{{--                            </tr>--}}
-{{--                            <tr>--}}
-{{--                                <td style="vertical-align: top; padding: 10px;">{{ $spiro->hasilBacaSpirometri->kesimpulan }}</td>--}}
-{{--                            </tr>--}}
                         </table>
                     @endif
                 @endforeach
@@ -1825,16 +1812,16 @@
                                 <tr>
                                     <td>
                                         <div class="col-2">
-                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
+                                            <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
                                                 class="logo">
                                         </div>
                                     </td>
 
-                                    <td class="text-center">
+                                     <td class="text-center">
                                         <div class="col-10">
-                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                             <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                                Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                             </p>
                                         </div>
                                     </td>
@@ -1927,77 +1914,76 @@
     @endif
 
      <!-- Page 9: Laboratorium -->
+    <div class="page-last">
+        <div class="header">
+            <div class="header-content">
+                <div class="hospital-logo-container">
+                    <div class="row align-items-center">
+                        <table border="0">
+                            <tr>
+                                <td>
+                                    <div class="col-2">
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
+                                            class="logo">
+                                    </div>
+                                </td>
 
-        <div class="page-last">
-            <div class="header">
-                <div class="header-content">
-                    <div class="hospital-logo-container">
-                        <div class="row align-items-center">
-                            <table border="0">
-                                <tr>
-                                    <td>
-                                        <div class="col-2">
-                                            <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                                class="logo">
-                                        </div>
-                                    </td>
-
-                                     <td class="text-center">
-                                        <div class="col-10">
-                                            <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
-                                            <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                                Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                                    <td class="text-center">
+                                    <div class="col-10">
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
+                                        <p class="mb-0 hospital-address" style="font-size: 8pt;">
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="patient-info">
-                <div class="patient-data">
-                    <table style="width:100%; border-collapse:collapse; font-size:10px;">
-                         @if ($employee->nik)
-                            <tr>
-                                <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
-                                <td style="width:10px; vertical-align:top;">:</td>
-                                <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
-                            </tr>
-                        @else
-                            <tr>
-                                <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
-                                <td style="width:10px; vertical-align:top;">:</td>
-                                <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
-                            </tr>
-                        @endif
+        <div class="patient-info">
+            <div class="patient-data">
+                <table style="width:100%; border-collapse:collapse; font-size:10px;">
+                        @if ($employee->nik)
                         <tr>
-                            <td style="font-weight:bold;">Nama Lengkap</td>
-                            <td>:</td>
-                            <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">NIK / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">{{$employee->nik}} / {{$employee->nrp}} </td>
                         </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="section-title">PEMERIKSAAN LABORATORIUM</div>
-            <div style="margin-top: 20px; font-size: 11px;">
-                <p>Daftar lampiran dalam dokumen ini:</p>
-                <ul style="list-style-type: decimal;">
-                    @forelse($all_pemeriksaan['laboratorium_files'] as $file)
-                        <li>{{ $file->nama_file }} (Lampiran Terlampir di halaman berikutnya)</li>
-                    @empty
-                        <li>Tidak ada file laboratorium.</li>
-                    @endforelse
-                </ul>
-            </div>
-
-            <div style="margin-top: 50px; font-size: 10px; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
-                * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
+                    @else
+                        <tr>
+                            <td style="width:130px; font-weight:bold; vertical-align:top;">No. Reg / NRP </td>
+                            <td style="width:10px; vertical-align:top;">:</td>
+                            <td style="font-weight:bold; color:#1e5a9e;">MC{{ str_pad($mcu->id, 12, '0', STR_PAD_LEFT) }} / {{$employee->nrp}} </td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td style="font-weight:bold;">Nama Lengkap</td>
+                        <td>:</td>
+                        <td style="font-weight:bold;">{{ strtoupper($employee->nama) }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
+
+        <div class="section-title">PEMERIKSAAN LABORATORIUM</div>
+        <div style="margin-top: 20px; font-size: 11px;">
+            <p>Daftar lampiran dalam dokumen ini:</p>
+            <ul style="list-style-type: decimal;">
+                @forelse($all_pemeriksaan['laboratorium_files'] as $file)
+                    <li>{{ $file->nama_file }} (Lampiran Terlampir di halaman berikutnya)</li>
+                @empty
+                    <li>Tidak ada file laboratorium.</li>
+                @endforelse
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; font-size: 10px; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
+            * Dokumen ini digenerate otomatis oleh sistem. Hasil laboratorium yang dilampirkan adalah bagian yang tidak terpisahkan dari laporan ini.
+        </div>
+    </div>
 
 </body>
 </html>

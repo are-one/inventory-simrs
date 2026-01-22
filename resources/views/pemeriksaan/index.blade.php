@@ -3009,7 +3009,8 @@
                                                                                 <option value="EKG">EKG</option>
                                                                                 <option value="Radiologi">Radiologi</option>
                                                                                 <option value="Audiometri">Audiometri</option>
-                                                                                {{--<option value="Spirometri">Spirometri</option>--}}
+                                                                                <option value="Spirometri">Spirometri</option>
+                                                                                <option value="Treadmill">Treadmill</option>
                                                                                 <option value="Lainnya">Lainnya</option>
                                                                             </select>
                                                                         </div>
@@ -3019,13 +3020,14 @@
                                                                             <label class="form-label">File Dokumen</label>
                                                                             <input type="file"
                                                                                 name="file"
+                                                                                id="fileInput"
                                                                                 class="form-control">
                                                                             <small class="text-muted">
                                                                                 PDF / JPG / PNG (Maks 5MB)
                                                                             </small>
                                                                         </div>
 
-                                                                        {{-- Form Hasil dan Kesimpulan (Hanya untuk Radiologi dan EKG) --}}
+                                                                        {{-- Form Hasil dan Kesimpulan (Hanya untuk  EKG) --}}
                                                                         <div class="col-12" id="hasilKesimpulanContainer" style="display: none;">
                                                                             <div class="row mt-3">
                                                                                 <div class="col-12">
@@ -3059,7 +3061,31 @@
                                                                             </div>
                                                                         </div>
 
-                                                                          {{-- Form Khusus Audiometri --}}
+                                                                        {{-- Form Hasil dan Kesimpulan (Hanya untuk  Radiologi) --}}
+                                                                        <div class="col-12" id="radiologiContainer" style="display: none;">
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-12">
+                                                                                    <div class="card border-info">
+
+                                                                                        <div class="card-body mt-3">
+                                                                                            <div class="row g-3">
+                                                                                                {{-- Hasil Pemeriksaan --}}
+                                                                                                <div class="col-12">
+                                                                                                    <label class="form-label">Hasil Baca</label>
+                                                                                                    <textarea name="hasil"
+                                                                                                            class="form-control"
+                                                                                                            rows="3"
+                                                                                                            placeholder="Masukkan hasil pemeriksaan..."></textarea>
+                                                                                                    <small class="text-muted">Deskripsi detail hasil pemeriksaan</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {{-- Form Khusus Audiometri --}}
                                                                         <div class="col-12" id="audiometriContainer" style="display: none;">
                                                                             <div class="row mt-3">
                                                                                 <div class="col-12">
@@ -3096,6 +3122,56 @@
                                                                                                             rows="3"
                                                                                                             placeholder="Masukkan kesimpulan hasil audiometri..."></textarea>
                                                                                                     <small class="text-muted">Kesimpulan hasil pemeriksaan audiometri</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {{-- Form Khusus Spirometri --}}
+                                                                        <div class="col-12" id="spirometerContainer" style="display: none;">
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-12">
+                                                                                    <div class="card border-info">
+
+                                                                                        <div class="card-body mt-3">
+                                                                                            <div class="row g-3">
+                                                                                                {{-- Kesimpulan Spirometer --}}
+                                                                                                <div class="col-12">
+                                                                                                    <label class="form-label">Kesimpulan Spirometer</label>
+                                                                                                    <textarea name="kesimpulan"
+                                                                                                            id="kesimpulanSpirometerInput"
+                                                                                                            class="form-control"
+                                                                                                            rows="3"
+                                                                                                            placeholder="Masukkan kesimpulan hasil ..."></textarea>
+                                                                                                    <small class="text-muted">Kesimpulan hasil pemeriksaan spirometer</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {{-- Form Khusus Treadmill --}}
+                                                                        <div class="col-12" id="treadmillContainer" style="display: none;">
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-12">
+                                                                                    <div class="card border-info">
+
+                                                                                        <div class="card-body mt-3">
+                                                                                            <div class="row g-3">
+                                                                                                {{-- Kesimpulan Treadmill --}}
+                                                                                                <div class="col-12">
+                                                                                                    <label class="form-label">Kesimpulan Treadmill</label>
+                                                                                                    <textarea name="kesimpulan"
+                                                                                                            id="kesimpulanTreadmillInput"
+                                                                                                            class="form-control"
+                                                                                                            rows="3"
+                                                                                                            placeholder="Masukkan kesimpulan hasil ..."></textarea>
+                                                                                                    <small class="text-muted">Kesimpulan hasil pemeriksaan treadmill</small>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -3541,39 +3617,130 @@
         }
 
         // Event listener untuk menampilkan/menyembunyikan form hasil & kesimpulan
-        document.getElementById('jenisDokumenSelect').addEventListener('change', function() {
+        document.getElementById('jenisDokumenSelect').addEventListener('change', function () {
             const jenisDokumen = this.value;
+
             const hasilKesimpulanContainer = document.getElementById('hasilKesimpulanContainer');
-            const audiometriContainer = document.getElementById('audiometriContainer');
+            const radiologiContainer      = document.getElementById('radiologiContainer');
+            const audiometriContainer     = document.getElementById('audiometriContainer');
+            const spirometerContainer     = document.getElementById('spirometerContainer');
+            const treadmillContainer      = document.getElementById('treadmillContainer');
+            const fileInput               = document.getElementById('fileInput');
 
-            // Reset semua container ke hidden
-            hasilKesimpulanContainer.style.display = 'none';
-            audiometriContainer.style.display = 'none';
+            const allContainers = [
+                hasilKesimpulanContainer,
+                radiologiContainer,
+                audiometriContainer,
+                spirometerContainer,
+                treadmillContainer
+            ];
 
-            // Reset required attributes
-            document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
-                textarea.required = false;
-                textarea.value = '';
-            });
-
-            document.querySelectorAll('#audiometriContainer input, #audiometriContainer textarea').forEach(input => {
-                input.required = false;
-                input.value = '';
-            });
-
-            // Tampilkan container sesuai jenis dokumen
-            if (jenisDokumen === 'Radiologi' || jenisDokumen === 'EKG' || jenisDokumen === "Spirometri") {
-                hasilKesimpulanContainer.style.display = 'block';
-                document.querySelectorAll('#hasilKesimpulanContainer textarea').forEach(textarea => {
-                    textarea.required = true;
-                });
-            } else if (jenisDokumen === 'Audiometri') {
-                audiometriContainer.style.display = 'block';
-                document.querySelectorAll('#audiometriContainer input, #audiometriContainer textarea').forEach(input => {
-                    input.required = true;
+            // =================================================
+            // HELPER: ENABLE / DISABLE INPUT DALAM CONTAINER
+            // =================================================
+            function setContainerEnabled(container, enabled) {
+                if (!container) return;
+                container.querySelectorAll('input, textarea, select').forEach(el => {
+                    el.disabled = !enabled;
                 });
             }
+
+            // =================================================
+            // RESET SEMUA CONTAINER
+            // =================================================
+            allContainers.forEach(container => {
+                if (!container) return;
+                container.style.display = 'none';
+                setContainerEnabled(container, false);
+            });
+
+            // Reset input file
+            fileInput.removeAttribute('multiple');
+            fileInput.name = 'file';
+            fileInput.value = '';
+
+            // Reset required attribute
+            document.querySelectorAll('input, textarea').forEach(el => {
+                if (
+                    el.type !== 'file' &&
+                    el.type !== 'hidden' &&
+                    el.name !== '_token'
+                ) {
+                    el.required = false;
+                }
+            });
+
+            // =================================================
+            // LOGIKA PER JENIS DOKUMEN
+            // =================================================
+
+            // =========================
+            // EKG
+            // =========================
+            if (jenisDokumen === 'EKG') {
+                hasilKesimpulanContainer.style.display = 'block';
+                setContainerEnabled(hasilKesimpulanContainer, true);
+
+                hasilKesimpulanContainer
+                    .querySelectorAll('textarea')
+                    .forEach(el => el.required = true);
+            }
+
+            // =========================
+            // RADIOLOGI
+            // =========================
+            else if (jenisDokumen === 'Radiologi') {
+                radiologiContainer.style.display = 'block';
+                setContainerEnabled(radiologiContainer, true);
+
+                radiologiContainer
+                    .querySelectorAll('textarea')
+                    .forEach(el => el.required = true);
+            }
+
+            // =========================
+            // AUDIOMETRI
+            // =========================
+            else if (jenisDokumen === 'Audiometri') {
+                audiometriContainer.style.display = 'block';
+                setContainerEnabled(audiometriContainer, true);
+
+                audiometriContainer
+                    .querySelectorAll('input, textarea')
+                    .forEach(el => el.required = true);
+            }
+
+            // =========================
+            // SPIROMETRI
+            // =========================
+            else if (jenisDokumen === 'Spirometri') {
+                spirometerContainer.style.display = 'block';
+                setContainerEnabled(spirometerContainer, true);
+
+                spirometerContainer
+                    .querySelectorAll('textarea')
+                    .forEach(el => el.required = true);
+            }
+
+            // =========================
+            // TREADMILL
+            // =========================
+            else if (jenisDokumen === 'Treadmill') {
+                treadmillContainer.style.display = 'block';
+                setContainerEnabled(treadmillContainer, true);
+
+                // multi file
+                fileInput.setAttribute('multiple', 'multiple');
+                fileInput.name = 'file[]';
+
+                const kesimpulanTreadmill = document.getElementById('kesimpulanTreadmillInput');
+                if (kesimpulanTreadmill) {
+                    kesimpulanTreadmill.required = true;
+                }
+            }
         });
+
+
 
         function renderDokumenRow(data) {
             // Tambahkan hasil dan kesimpulan jika ada

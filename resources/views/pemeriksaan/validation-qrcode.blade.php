@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validasi MCU - RSUD Konawe</title>
+    <title>Validasi MCU - Klinik Utama Surya Medical Center</title>
     <style>
         * {
             margin: 0;
@@ -136,7 +136,7 @@
     <div class="container">
         <div class="header">
             <h1>VALIDASI MCU</h1>
-            <p>RSUD KONAWE</p>
+            <p>KLINIK UTAMA SURYA MEDICAL CENTER</p>
             <div class="validation-badge">
                 BERHASIL DIVALIDASI
             </div>
@@ -231,8 +231,8 @@
         @endif
 
         <div class="footer">
-            <p>Dokumen ini divalidasi secara elektronik oleh sistem RSUD Konawe</p>
-            <p>© {{ date('Y') }} RSUD Konawe - All rights reserved</p>
+            <p>Dokumen ini divalidasi secara elektronik oleh sistem Klinik Utama Surya Medical Center</p>
+            <p>© {{ date('Y') }} Klinik Utama SMC - All rights reserved</p>
         </div>
     </div>
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Surya Medical Center</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    <main style="background-image: url('{{ asset('assets/img/login_background2.jpg') }}'); background-size: cover; background-repeat: no-repeat">
+    <main style="background-image: url('{{ asset('assets/img/login_background_smc.png') }}'); background-size: cover; background-repeat: no-repeat">
 
         <div class="container">
 

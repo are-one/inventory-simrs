@@ -11,8 +11,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets') }}/img/health-checkup.png" rel="icon">
-    <link href="{{ asset('assets') }}/img/health-checkup.png" rel="apple-touch-icon">
+    <link href="{{ asset('assets') }}/img/icon-smc-header.png" rel="icon">
+    <link href="{{ asset('assets') }}/img/icon-smc-header.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -75,7 +75,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Team MCU</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>IT Medik</span></strong>. All Rights Reserved
         </div>
     </footer><!-- End Footer -->
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan MCU - RSUD Konawe</title>
+    <title>MCU - Surya Medical Center</title>
     <style>
         * {
             margin: 0;
@@ -74,7 +74,7 @@
         .hospital-name {
             font-size: 14px;
             font-weight: bold;
-            color: #1e5a9e;
+            color: #f10c21;
             margin-bottom: 3px;
         }
 
@@ -401,16 +401,16 @@
                             <tr>
                                 <td>
                                     <div class="col-2">
-                                        <img src="{{ public_path('assets/img/logo-konawe.png') }}" alt="Logo"
-                                             class="logo">
+                                        <img src="{{ public_path('assets/img/icon-smc.jpeg') }}" alt="Logo"
+                                            class="logo">
                                     </div>
                                 </td>
 
-                                <td class="text-center">
+                                 <td class="text-center">
                                     <div class="col-10">
-                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">RUMAH SAKIT UMUM DAERAH KABUPATEN KONAWE</h5>
+                                        <h5 style="font-weight: bold; margin: 0;" class="hospital-name">KLINIK UTAMA SURYA MEDICAL CENTER</h5>
                                         <p class="mb-0 hospital-address" style="font-size: 8pt;">
-                                            Jl. Diponegoro No. 301 Konawe - Sulawesi Tenggara<br>Telepon: 0822 4559 3648 | Email : bludrsudkonawe.com
+                                            Jl. Jendral Sudirman Kel. Tuoy Kec. Unaaha Kab. Konawe, Sulawesi Tenggara<br>Telepon: 0821 9999 3055 | Email : surya.medcen@gmail.com
                                         </p>
                                     </div>
                                 </td>
@@ -453,7 +453,7 @@
                         <th style="width: 20%;">Hasil</th>
                     </tr>
                     <tr>
-                        <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->hasil }}</td>
+                        <td style="vertical-align: top; padding: 10px;">{{ $treadmills->hasilBacaTreadmill->kesimpulan }}</td>
                     </tr>
                     {{-- <tr>
                         <th style="width: 20%;">Kesimpulan</th>
